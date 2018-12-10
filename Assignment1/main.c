@@ -7,6 +7,13 @@
  * study period 4, 2018.
  *****************************************************************************/
 #include "main.h"
+#include "io.h"
+
+void setupPlayers(struct player *players) {
+    strcpy(players[0].name, "test_1");
+    strcpy(players[1].name, "test_2");
+}
+
 int main(void) {
         /**
          * allocation of players they are available after the end of the game.
@@ -21,11 +28,26 @@ int main(void) {
         struct player *winner;
         /* scoreboard for the program - add winners to this scoreboard */
         struct score scores[NUM_SCORES];
+        /* menuSelection char to process user selections on menu */
+        int menuSelected;
         /* initialise the scores */
         scoreboard_init(scores);
         /* repeatedly display the menu until the decision is made to quit.
          * Allow the options to play the game, display high scores or
          * quit
          */
+        do {
+
+            menuSelected = menuSelection();
+
+            if (menuSelected == PLAY_GAME) {
+                play_game(players);
+            } else if (menuSelected == DISPLAY_SCORE) {
+
+            }
+            
+        } while (menuSelected !=EXIT_PROG); 
+
         return EXIT_SUCCESS;
 }
+

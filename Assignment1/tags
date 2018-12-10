@@ -1,0 +1,84 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOARDHEIGHT	board.h	27;"	d
+BOARDWIDTH	board.h	28;"	d
+BOARD_H	board.h	15;"	d
+BOOLEAN	shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon1
+COL_BLUE	io.h	/^        COL_BLUE,$/;"	e	enum:color
+COL_CYAN	io.h	/^        COL_CYAN,$/;"	e	enum:color
+COL_GREEN	io.h	/^        COL_GREEN,$/;"	e	enum:color
+COL_MAGENTA	io.h	/^        COL_MAGENTA,$/;"	e	enum:color
+COL_RED	io.h	/^        COL_RED,$/;"	e	enum:color
+COL_RESET	io.h	/^        COL_RESET$/;"	e	enum:color
+COL_YELLOW	io.h	/^        COL_YELLOW,$/;"	e	enum:color
+C_BLANK	board.h	/^enum cell { C_NOUGHT, C_CROSS, C_BLANK, C_INVALID = EOF };$/;"	e	enum:cell
+C_CROSS	board.h	/^enum cell { C_NOUGHT, C_CROSS, C_BLANK, C_INVALID = EOF };$/;"	e	enum:cell
+C_INVALID	board.h	/^enum cell { C_NOUGHT, C_CROSS, C_BLANK, C_INVALID = EOF };$/;"	e	enum:cell
+C_NOUGHT	board.h	/^enum cell { C_NOUGHT, C_CROSS, C_BLANK, C_INVALID = EOF };$/;"	e	enum:cell
+DECIMAL	io.h	36;"	d
+EXTRACHARS	io.h	26;"	d
+FALSE	shared.h	/^               FALSE,$/;"	e	enum:__anon1
+GAME_H	game.h	18;"	d
+HELPERS_H	helpers.h	16;"	d
+IO_H	io.h	18;"	d
+IR_FAILURE	io.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_RTM	io.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_SUCCESS	io.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+LINELEN	io.h	31;"	d
+MAIN_H	main.h	17;"	d
+NAMELEN	player.h	21;"	d
+NUMPLAYERS	game.h	34;"	d
+NUM_COLORS	io.h	62;"	d
+NUM_SCORES	scores.h	27;"	d
+PLAYER_H	player.h	16;"	d
+RULES_H	rules.h	14;"	d
+SCORES_H	scores.h	16;"	d
+SHARED_H	shared.h	19;"	d
+TRUE	shared.h	/^               TRUE$/;"	e	enum:__anon1
+apply_move	rules.c	/^void apply_move(const struct coordinate *coord, struct player *curplayer) {$/;"	f
+board	game.h	/^        gameboard board;$/;"	m	struct:game
+board_init	board.c	/^void board_init(gameboard aboard) {$/;"	f
+breakChar	io.c	12;"	d	file:
+calculate_score	rules.c	/^void calculate_score(struct player *curplayer) {$/;"	f
+cell	board.h	/^enum cell { C_NOUGHT, C_CROSS, C_BLANK, C_INVALID = EOF };$/;"	g
+color	io.h	/^enum color {$/;"	g
+color_strings	io.c	/^const char* color_strings[NUM_COLORS] = {$/;"	v
+coordinate	rules.h	/^struct coordinate {$/;"	s
+curr_game	player.h	/^        struct game* curr_game;$/;"	m	struct:player	typeref:struct:player::game
+current	game.h	/^        struct player* current;$/;"	m	struct:game	typeref:struct:game::player
+error_print	io.c	/^int error_print(const char format[], ...) {$/;"	f
+game	game.h	/^struct game {$/;"	s
+gameboard	board.h	/^typedef enum cell gameboard[BOARDHEIGHT][BOARDWIDTH];$/;"	t	typeref:enum:cell
+init_game	game.c	/^BOOLEAN init_game(struct game* thegame) { $/;"	f
+input_result	io.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	g
+is_valid_move	rules.c	/^BOOLEAN is_valid_move(const struct coordinate *coord, gameboard board) {$/;"	f
+is_winner	rules.c	/^BOOLEAN is_winner(struct player *curplayer) {$/;"	f
+main	main.c	/^int main(void) {$/;"	f
+menuOptionSize	io.c	11;"	d	file:
+menuSelection	io.c	/^int menuSelection() {$/;"	f
+name	player.h	/^        char name[NAMELEN + 1];$/;"	m	struct:player
+normal_print	io.c	/^int normal_print(const char format[], ...) {$/;"	f
+other	game.h	/^        struct player* other;$/;"	m	struct:game	typeref:struct:game::player
+play_game	game.c	/^struct player* play_game(struct player players[]) {$/;"	f
+player	player.h	/^struct player {$/;"	s
+player	scores.h	/^        char player[NAMELEN + 1];$/;"	m	struct:score
+player_init	player.c	/^enum input_result player_init(struct player* curplayer, int playernum,$/;"	f
+player_turn	player.c	/^enum input_result player_turn(struct player* curplayer) {$/;"	f
+players	game.h	/^        struct player* players;$/;"	m	struct:game	typeref:struct:game::player
+print_board	io.c	/^void print_board(gameboard board) {}$/;"	f
+read_rest_of_line	io.c	/^static void read_rest_of_line(void) {$/;"	f	file:
+score	player.h	/^        int score;$/;"	m	struct:player
+score	scores.h	/^        int score;$/;"	m	struct:score
+score	scores.h	/^struct score {$/;"	s
+scoreboard_add	scores.c	/^BOOLEAN scoreboard_add(struct score scores[], const struct player* winner) {$/;"	f
+scoreboard_init	scores.c	/^void scoreboard_init(struct score scores[]) {$/;"	f
+scoreboard_print	scores.c	/^void scoreboard_print(struct score scores[]) {$/;"	f
+swap_players	game.c	/^void swap_players(struct player** first, struct player** second) {$/;"	f
+token	player.h	/^        enum cell token;$/;"	m	struct:player	typeref:enum:player::cell
+wincount	game.h	/^        int wincount;$/;"	m	struct:game
+x	rules.h	/^        int x, y;$/;"	m	struct:coordinate
+y	rules.h	/^        int x, y;$/;"	m	struct:coordinate

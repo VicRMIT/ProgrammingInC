@@ -12,6 +12,7 @@
  * initialises the board to a known safe (empty) state
  **/
 void board_init(gameboard aboard) {
+
 }
 
 /* you may wish to add further functions for the managing of the gameboard here

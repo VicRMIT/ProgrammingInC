@@ -77,6 +77,7 @@ extern const char* color_strings[];
  **/
 enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };
 
+enum menu_choice {PLAY_GAME, DISPLAY_SCORE, EXIT_PROG, INVALID_SELECTION = EOF};
 /**
  * functions implemented in this module. Please see io.c for further details
  **/
@@ -84,6 +85,8 @@ enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };
 int normal_print(const char format[], ...);
 
 int error_print(const char format[], ...);
+
+int menuSelection();
 
 void print_board(gameboard);
 

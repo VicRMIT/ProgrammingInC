@@ -21,7 +21,17 @@ BOOLEAN init_game(struct game* thegame) {
      * You should also decide who is going first (use random) and assign the 
      * pointers to current and other appropriately.
      */
-    return FALSE; 
+    board_init(thegame->board);
+    thegame->wincount = 3;
+    thegame->players[0].score = 0;   
+    thegame->players[0].token = C_NOUGHT ;   
+    strcpy(thegame->players[0].name, "test1");
+    thegame->players[1].score = 0;   
+    thegame->players[1].token = C_CROSS ;   
+    strcpy(thegame->players[1].name, "test2");
+    thegame->current = &thegame->players[0];
+    thegame->other = &thegame->players[1];    
+    return TRUE; 
 }
 
 /**
@@ -35,6 +45,11 @@ struct player* play_game(struct player players[]) {
         /* this declaration also allocates memory for what is contained in the
          * game struct */
         struct game thegame;
+        players[0].curr_game = &thegame;
+        players[1].curr_game = &thegame;
+        thegame.players = players;
+        init_game(&thegame);
+
         /* we need to attach the players array to the game struct as the players
          * need to be allocated outside of play_game() so we can return the
          * player to main()
@@ -68,4 +83,8 @@ struct player* play_game(struct player players[]) {
  * ponter points to pass in its address.
  **/
 void swap_players(struct player** first, struct player** second) {
+    struct player* firstPlayer;
+    firstPlayer = * first;
+    *first = *second;
+    *second = firstPlayer;
 }

@@ -8,6 +8,8 @@
  *****************************************************************************/
 #include "io.h"
 
+#define menuOptionSize 1
+#define breakChar 1
 /**
  * The colour codes for printing out coloured output. You just print out the
  * code to change the current colour being printed outThe colour codes for
@@ -72,4 +74,47 @@ int error_print(const char format[], ...) {
         output_chars += vfprintf(stderr, format, va_args);
         output_chars += fprintf(stderr, "\n");
         return output_chars;
+}
+
+int menuSelection(void) {
+    int selection;
+    char menuChoice[menuOptionSize + breakChar]; 
+    normal_print("Welcome to TicTacN\n"); 
+    normal_print("------------------\n"); 
+    normal_print("1. Play the Game\n"); 
+    normal_print("2. Display high scores\n"); 
+    normal_print("3. Exit the program \n"); 
+    normal_print("Please enter the number of the item you wish to select: \n"); 
+
+    while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
+        if (menuChoice[0] == '\n') {
+            normal_print("You did not make a selection, please select [1], [2], or [3].\n");
+            selection = INVALID_SELECTION;
+        }
+        else if (menuChoice[1] != '\n') {
+            normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+            read_rest_of_line();
+            selection = INVALID_SELECTION;
+        }
+        else if (isdigit(menuChoice[0])) {
+            selection = menuChoice[0] - '0';
+            if (selection > 0 && selection < 4) {
+                switch (selection) {
+                    case 1:
+                        return PLAY_GAME;
+                    case 2:
+                        return DISPLAY_SCORE;
+                    case 3:
+                        return EXIT_PROG;
+                }
+            } else {
+                selection = INVALID_SELECTION;
+                normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+            }
+        } else {
+            selection = INVALID_SELECTION;
+            normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+        }
+    }
+    return selection;
 }
