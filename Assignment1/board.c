@@ -12,7 +12,13 @@
  * initialises the board to a known safe (empty) state
  **/
 void board_init(gameboard aboard) {
-
+    int i;
+    int j;
+    for (i = 0; i < BOARDHEIGHT; i++) {
+        for (j = 0; j < BOARDWIDTH; j++) {
+            aboard[i][j] = C_BLANK;
+        }
+    } 
 }
 
 /* you may wish to add further functions for the managing of the gameboard here

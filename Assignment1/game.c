@@ -31,6 +31,8 @@ BOOLEAN init_game(struct game* thegame) {
     strcpy(thegame->players[1].name, "test2");
     thegame->current = &thegame->players[0];
     thegame->other = &thegame->players[1];    
+    thegame->players[0].curr_game = thegame;
+    thegame->players[1].curr_game = thegame;
     return TRUE; 
 }
 
@@ -45,18 +47,18 @@ struct player* play_game(struct player players[]) {
         /* this declaration also allocates memory for what is contained in the
          * game struct */
         struct game thegame;
-        players[0].curr_game = &thegame;
-        players[1].curr_game = &thegame;
-        thegame.players = players;
-        init_game(&thegame);
 
         /* we need to attach the players array to the game struct as the players
          * need to be allocated outside of play_game() so we can return the
          * player to main()
          */
         
+        thegame.players = players;
         /* initialise the game */
 
+        init_game(&thegame);
+
+        print_board(thegame.board);
         /* the game loop - continue until there is a winner or all spots have
          * been filled up
          */

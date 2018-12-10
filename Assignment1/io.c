@@ -36,10 +36,49 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
+void print_symbol(enum cell symbol) {
+    switch(symbol) {
+        case C_NOUGHT:
+            normal_print(" O |");
+            break;
+        case C_CROSS:
+            normal_print(" X |");
+            break;
+        case C_BLANK:
+            normal_print("   |");
+            break;
+        case C_INVALID:
+            normal_print("   |");
+            break;
+    }
+}
+
 /**
  * prints out the current state of the board
  **/
-void print_board(gameboard board) {}
+void print_board(gameboard board) {
+    int i;
+    int j;
+    normal_print("Current board state\n");
+    normal_print("===================\n");
+    for (i=-1; i<BOARDHEIGHT; i++) {
+        normal_print("|");
+        for (j=-1; j<BOARDWIDTH; j++) {
+            if (i == -1 && j == -1)   
+                normal_print("   |");
+            else if (i == -1)
+                normal_print(" %d |",j+1);
+            else if (j == -1)
+                normal_print(" %d |",i+1);
+            else {
+                print_symbol(board[i][j]);
+            }
+        }
+        normal_print("\n");
+        normal_print("-------------------------------------");
+        normal_print("\n");
+    }
+}
 
 /**
  * acts as a proxy to printf. All output sent here will go to normal output via
