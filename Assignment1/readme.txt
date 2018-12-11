@@ -8,9 +8,37 @@
  *****************************************************************************/
 
  How to use the program: 
+ 
+ Run tic-tac-n and it will show the main menu. Select an option using the keyboard - 
+ enter 1, 2, or 3 and hit return to select a menu option.
+
+ Option 1 starts a new game.
+ Option 2 shows the scoreboard [NOT YET IMPLEMENTED].
+ Option 3 quits the program.
+ An invalid selection will request you to enter another input.
+
+ When option 1 is select you will be prompted for three pieces of information
+ 1. Minimum umber of consecutive board positions required for a win;
+ 2. Player 1's name;
+ 3. Player 2's name.
+
+ The number entered must be between 4 and 8 (inclusive). The player names must be less
+ than 20 characters long. Hitting return on an empty line or Ctrl + d will take the 
+ user back to the main menu from any of the above three prompts.
+
+ The program will select a token for each player at random, as well as the playing order.
+ The player with crosses will be shown in blue. The player with noughts will be shown in
+ red.
 
  Known bugs: 
+ There are no currently known bugs. [GAME NOT YET FULLY IMPLEMENTED]
 
  Code attributions: 
+ Code is my own with the exception of startup code provided by Paul Miller. No blocks
+ or multi-line sections have been taken from external sources.
+
+ C documentation at https://en.cppreference.com/w/c has been referred to for general
+ C help. https://site.google.com/a/rmit.edu.au/programming-in-c---notes has also been
+ used as a reference for C functions.
 
 

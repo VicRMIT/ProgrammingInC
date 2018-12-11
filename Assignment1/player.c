@@ -20,6 +20,10 @@ enum input_result player_init(struct player* curplayer, int playernum,
     enum input_result result;
     curplayer->score = 0;
     curplayer->curr_game = curgame;
+    /* 
+     * Loop that keeps trying to get a valid entry for player name until
+     * successful or player quits.
+     */
     while ((result=get_name(curplayer->name))!=IR_SUCCESS) {
         if (result == IR_RTM)
             return IR_RTM;        

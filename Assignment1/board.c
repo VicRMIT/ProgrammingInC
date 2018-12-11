@@ -14,6 +14,10 @@
 void board_init(gameboard aboard) {
     int i;
     int j;
+    /* 
+     * Iterates through height and width settings
+     * all to C_BLANK
+     */
     for (i = 0; i < BOARDHEIGHT; i++) {
         for (j = 0; j < BOARDWIDTH; j++) {
             aboard[i][j] = C_BLANK;

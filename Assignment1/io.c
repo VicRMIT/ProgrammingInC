@@ -37,6 +37,10 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
+/**
+ * get symbol passed as an argument and print the appropriate characters
+ * to the string.
+ **/
 void print_symbol(enum cell symbol) {
     switch(symbol) {
         case C_NOUGHT:
@@ -54,6 +58,9 @@ void print_symbol(enum cell symbol) {
     }
 }
 
+/** 
+ * prints the name of the current player and the current player's score
+ **/
 void print_game_status(char s[], int score, enum cell token) { 
     int resetNum;
     int colorNum;
@@ -69,7 +76,8 @@ void print_game_status(char s[], int score, enum cell token) {
 } 
 
 /**
- * prints out the current state of the board
+ * prints out the current state of the board. Hard coded boundary characters, otherwise
+ * reads the symbol at the board location and calls print_symbol.
  **/
 void print_board(gameboard board) {
     int i;
@@ -130,14 +138,18 @@ int error_print(const char format[], ...) {
         return output_chars;
 }
 
+/**
+ * fgets conditional that checks for newline or ctrl-d, entries that are too long
+ * and a successful entry. Returns the appropriate value.
+ **/
 enum input_result get_name(char curName[]) {
     char name[NAMELEN+1] = {0};
-    while(fgets(name, sizeof(name)+1,stdin) != NULL) {
+    if (fgets(name, sizeof(name)+1,stdin) != NULL) {
         if(name[0] == '\n') {
             return IR_RTM; 
         }
         if(name[sizeof(name)-1] != '\n' && name[sizeof(name)-1] != 0 ) {
-            normal_print("That name is too long, please enter "
+            error_print("That name is too long, please enter "
                     "another: ");
             read_rest_of_line();
             return IR_FAILURE;
@@ -151,16 +163,20 @@ enum input_result get_name(char curName[]) {
     return IR_RTM;
 }
 
+/**
+ * fgets conditional that checks for newline or crl-d, entries that are too long, entries
+ * that are out of range, and a successful entry. Returns the appropriate value.
+ **/
 enum input_result get_win_count(int *winCount) {
     int selection;
     char menuChoice[menuOptionSize + breakChar]; 
 
-    while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
+    if (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
         if (menuChoice[0] == '\n') {
             return IR_RTM;
         }
         else if (menuChoice[1] != '\n') {
-            normal_print("That entry is too long, please enter a number between 3 "
+            error_print("That entry is too long, please enter a number between 3 "
                     "and 8: ");
             read_rest_of_line();
             return IR_FAILURE;
@@ -171,12 +187,12 @@ enum input_result get_win_count(int *winCount) {
                 *winCount = selection;
                 return IR_SUCCESS;
             } else {
-                normal_print("That entry is invalid, please enter a number between 3 "
+                error_print("That entry is invalid, please enter a number between 3 "
                         "and 8: ");
                 return IR_FAILURE;
             }
         } else {
-                normal_print("That entry is invalid, please enter a number between 3 "
+                error_print("That entry is invalid, please enter a number between 3 "
                         "and 8: ");
                 return IR_FAILURE;
         }
@@ -185,6 +201,10 @@ enum input_result get_win_count(int *winCount) {
     return IR_RTM;
 }
 
+/**
+ * fgets conditional loop that checks for newline or crl-d, entries that are too long, entries
+ * that are out of range, and a successful entry. Returns the appropriate menu selection.
+ **/
 int menuSelection(void) {
     int selection;
     char menuChoice[menuOptionSize + breakChar]; 
@@ -197,11 +217,11 @@ int menuSelection(void) {
 
     while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
         if (menuChoice[0] == '\n') {
-            normal_print("You did not make a selection, please select [1], [2], or [3]: ");
+            error_print("You did not make a selection, please select [1], [2], or [3]: ");
             selection = INVALID_SELECTION;
         }
         else if (menuChoice[1] != '\n') {
-            normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
+            error_print("Your selection is not valid, please select [1], [2], or [3]: ");
             read_rest_of_line();
             selection = INVALID_SELECTION;
         }
@@ -218,11 +238,11 @@ int menuSelection(void) {
                 }
             } else {
                 selection = INVALID_SELECTION;
-                normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
+                error_print("Your selection is not valid, please select [1], [2], or [3]: ");
             }
         } else {
             selection = INVALID_SELECTION;
-            normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
+            error_print("Your selection is not valid, please select [1], [2], or [3]: ");
         }
     }
     return EXIT_PROG;
