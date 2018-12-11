@@ -23,6 +23,7 @@ BOOLEAN init_game(struct game* thegame) {
      */
     enum input_result result;
     int i;
+    int randNumber;
 
     board_init(thegame->board);
 
@@ -41,12 +42,19 @@ BOOLEAN init_game(struct game* thegame) {
             if (result == IR_RTM)
                 return FALSE;
         }
+        remove_newlines(thegame->players[0].name);
     }
     
-    thegame->players[0].token = C_NOUGHT ;   
-    thegame->players[1].token = C_CROSS ;   
-    thegame->current = &thegame->players[0];
-    thegame->other = &thegame->players[1];
+
+    randNumber = rand() % 2;
+    
+    thegame->players[randNumber].token = C_NOUGHT;   
+    thegame->players[randNumber^1].token = C_CROSS;
+
+    randNumber = rand() % 2;
+
+    thegame->current = &thegame->players[randNumber];
+    thegame->other = &thegame->players[randNumber^1];
 
     return TRUE; 
 }

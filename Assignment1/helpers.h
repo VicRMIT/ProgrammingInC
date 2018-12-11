@@ -15,6 +15,7 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+void remove_newlines(char s[]);
 /* place declarations of datastructures and constants as well as functions
  * for this module here */
 #endif

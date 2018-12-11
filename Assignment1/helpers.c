@@ -7,3 +7,10 @@
  * study period 4, 2018.
  *****************************************************************************/
 #include "helpers.h"
+
+void remove_newlines(char s[]) {
+    char *newlinePointer;
+    while ((newlinePointer = (strrchr(s, '\n'))) != NULL) {
+        *newlinePointer = '\000';        
+    }
+}
