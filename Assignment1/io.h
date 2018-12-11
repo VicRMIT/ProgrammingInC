@@ -94,8 +94,6 @@ void print_game_status(char s[], int, enum cell);
 
 enum input_result get_win_count(int *s);
 
-#include "player.h"
-
-enum input_result get_name(struct player*, int,struct  game*);
+enum input_result get_name(char s[]);
 
 #endif

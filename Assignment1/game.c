@@ -42,10 +42,10 @@ BOOLEAN init_game(struct game* thegame) {
             if (result == IR_RTM)
                 return FALSE;
         }
-        remove_newlines(thegame->players[0].name);
+        remove_newlines(thegame->players[i].name);
     }
     
-
+    srand(time(NULL));
     randNumber = rand() % 2;
     
     thegame->players[randNumber].token = C_NOUGHT;   

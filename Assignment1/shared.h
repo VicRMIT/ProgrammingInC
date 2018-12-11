@@ -18,13 +18,13 @@
 #ifndef SHARED_H
 #define SHARED_H
 
-/**
- * The BOOLEAN datatype used in this application
- **/
-
 typedef enum { /* FALSE comes first as we start counting at 0 */
                FALSE,
                TRUE
 } BOOLEAN;
+/**
+ * The BOOLEAN datatype used in this application
+ **/
+
 
 #endif /* end of include guard */

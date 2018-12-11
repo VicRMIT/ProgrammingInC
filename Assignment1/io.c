@@ -7,6 +7,7 @@
  * study period 4, 2018.
  *****************************************************************************/
 #include "io.h"
+#include "player.h"
 
 #define menuOptionSize 1
 #define breakChar 1
@@ -129,8 +130,7 @@ int error_print(const char format[], ...) {
         return output_chars;
 }
 
-enum input_result get_name(struct player* curPlayer, int playernum,
-        struct game* curgame) {
+enum input_result get_name(char curName[]) {
     char name[NAMELEN+1] = {0};
     while(fgets(name, sizeof(name)+1,stdin) != NULL) {
         if(name[0] == '\n') {
@@ -143,7 +143,7 @@ enum input_result get_name(struct player* curPlayer, int playernum,
             return IR_FAILURE;
         }
         else {
-            strcpy(curPlayer->name, name);
+            strcpy(curName, name);
             return IR_SUCCESS;
         }
     }
