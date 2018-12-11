@@ -53,6 +53,20 @@ void print_symbol(enum cell symbol) {
     }
 }
 
+void print_game_status(char s[], int score, enum cell token) { 
+    int resetNum;
+    int colorNum;
+    if (token==C_CROSS)
+        colorNum=3;
+    else
+        colorNum=0;
+    resetNum = 6;
+    
+    normal_print("It is %s%s%s's turn to make a move, and their score is %d. Please enter "
+            "a coordinate to place your piece in comma separated format with the column "
+            "first and the row second: ",color_strings[colorNum],s,color_strings[resetNum],score);
+} 
+
 /**
  * prints out the current state of the board
  **/
@@ -115,6 +129,62 @@ int error_print(const char format[], ...) {
         return output_chars;
 }
 
+enum input_result get_name(struct player* curPlayer, int playernum,
+        struct game* curgame) {
+    char name[NAMELEN+1] = {0};
+    while(fgets(name, sizeof(name)+1,stdin) != NULL) {
+        if(name[0] == '\n') {
+            return IR_RTM; 
+        }
+        if(name[sizeof(name)-1] != '\n' && name[sizeof(name)-1] != 0 ) {
+            normal_print("That name is too long, please enter "
+                    "another: ");
+            read_rest_of_line();
+            return IR_FAILURE;
+        }
+        else {
+            strcpy(curPlayer->name, name);
+            return IR_SUCCESS;
+        }
+    }
+    normal_print("\n");
+    return IR_RTM;
+}
+
+enum input_result get_win_count(int *winCount) {
+    int selection;
+    char menuChoice[menuOptionSize + breakChar]; 
+
+    while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
+        if (menuChoice[0] == '\n') {
+            return IR_RTM;
+        }
+        else if (menuChoice[1] != '\n') {
+            normal_print("That entry is too long, please enter a number between 3 "
+                    "and 8: ");
+            read_rest_of_line();
+            return IR_FAILURE;
+        }
+        else if (isdigit(menuChoice[0])) {
+            selection = menuChoice[0] - '0';
+            if (selection > 2 && selection < 9) {
+                *winCount = selection;
+                return IR_SUCCESS;
+            } else {
+                normal_print("That entry is invalid, please enter a number between 3 "
+                        "and 8: ");
+                return IR_FAILURE;
+            }
+        } else {
+                normal_print("That entry is invalid, please enter a number between 3 "
+                        "and 8: ");
+                return IR_FAILURE;
+        }
+    }
+    normal_print("\n");
+    return IR_RTM;
+}
+
 int menuSelection(void) {
     int selection;
     char menuChoice[menuOptionSize + breakChar]; 
@@ -123,15 +193,15 @@ int menuSelection(void) {
     normal_print("1. Play the Game\n"); 
     normal_print("2. Display high scores\n"); 
     normal_print("3. Exit the program \n"); 
-    normal_print("Please enter the number of the item you wish to select: \n"); 
+    normal_print("Please enter the number of the item you wish to select: "); 
 
     while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
         if (menuChoice[0] == '\n') {
-            normal_print("You did not make a selection, please select [1], [2], or [3].\n");
+            normal_print("You did not make a selection, please select [1], [2], or [3]: ");
             selection = INVALID_SELECTION;
         }
         else if (menuChoice[1] != '\n') {
-            normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+            normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
             read_rest_of_line();
             selection = INVALID_SELECTION;
         }
@@ -148,12 +218,12 @@ int menuSelection(void) {
                 }
             } else {
                 selection = INVALID_SELECTION;
-                normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+                normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
             }
         } else {
             selection = INVALID_SELECTION;
-            normal_print("Your selection is not valid, please select [1], [2], or [3].\n");
+            normal_print("Your selection is not valid, please select [1], [2], or [3]: ");
         }
     }
-    return selection;
+    return EXIT_PROG;
 }

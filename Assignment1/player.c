@@ -17,7 +17,14 @@
  **/
 enum input_result player_init(struct player* curplayer, int playernum,
                               struct game* curgame) {
-        return IR_FAILURE;
+    enum input_result result;
+    curplayer->score = 0;
+    curplayer->curr_game = curgame;
+    while ((result=get_name(curplayer, playernum, curgame))!=IR_SUCCESS) {
+        if (result == IR_RTM)
+            return IR_RTM;        
+    }
+    return IR_SUCCESS;
 }
 
 /**

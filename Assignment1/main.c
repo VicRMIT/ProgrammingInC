@@ -9,11 +9,6 @@
 #include "main.h"
 #include "io.h"
 
-void setupPlayers(struct player *players) {
-    strcpy(players[0].name, "test_1");
-    strcpy(players[1].name, "test_2");
-}
-
 int main(void) {
         /**
          * allocation of players they are available after the end of the game.

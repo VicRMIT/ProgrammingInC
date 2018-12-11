@@ -21,18 +21,32 @@ BOOLEAN init_game(struct game* thegame) {
      * You should also decide who is going first (use random) and assign the 
      * pointers to current and other appropriately.
      */
+    enum input_result result;
+    int i;
+
     board_init(thegame->board);
-    thegame->wincount = 3;
-    thegame->players[0].score = 0;   
+
+    normal_print("Please enter a number between 3 and 8 for the minimum number in a "
+            "row required for a win: ");
+
+    while ((result = get_win_count(&thegame->wincount))!=IR_SUCCESS) {
+        if (result==IR_RTM)
+            return FALSE;
+    }
+
+    for (i=0; i<NUMPLAYERS; i++) {
+        normal_print("Please enter a name for player %d: ", i+1);
+        while ((result = player_init(&thegame->players[i], i+1, 
+                        thegame))!=IR_SUCCESS) {
+            if (result == IR_RTM)
+                return FALSE;
+        }
+    }
+    
     thegame->players[0].token = C_NOUGHT ;   
-    strcpy(thegame->players[0].name, "test1");
-    thegame->players[1].score = 0;   
     thegame->players[1].token = C_CROSS ;   
-    strcpy(thegame->players[1].name, "test2");
     thegame->current = &thegame->players[0];
     thegame->other = &thegame->players[1];    
-    thegame->players[0].curr_game = thegame;
-    thegame->players[1].curr_game = thegame;
     return TRUE; 
 }
 
@@ -56,9 +70,12 @@ struct player* play_game(struct player players[]) {
         thegame.players = players;
         /* initialise the game */
 
-        init_game(&thegame);
+        if (init_game(&thegame)!=FALSE) {
+            print_board(thegame.board);
+            print_game_status(thegame.current->name, thegame.current->score, 
+                thegame.current->token);
+        }
 
-        print_board(thegame.board);
         /* the game loop - continue until there is a winner or all spots have
          * been filled up
          */
