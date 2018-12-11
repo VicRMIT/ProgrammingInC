@@ -1,7 +1,7 @@
 /******************************************************************************
- * Student Name    :
- * RMIT Student ID :
- * COURSE CODE     :
+ * Student Name    : Victor Ageev
+ * RMIT Student ID : S3732094
+ * COURSE CODE     : COSC2138
  *
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
@@ -46,7 +46,8 @@ BOOLEAN init_game(struct game* thegame) {
     thegame->players[0].token = C_NOUGHT ;   
     thegame->players[1].token = C_CROSS ;   
     thegame->current = &thegame->players[0];
-    thegame->other = &thegame->players[1];    
+    thegame->other = &thegame->players[1];
+
     return TRUE; 
 }
 
