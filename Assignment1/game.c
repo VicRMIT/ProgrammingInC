@@ -88,7 +88,7 @@ struct player* play_game(struct player players[]) {
         /* this declaration also allocates memory for what is contained in the
          * game struct */
         struct game thegame;
-
+        enum input_result result;
         /* we need to attach the players array to the game struct as the players
          * need to be allocated outside of play_game() so we can return the
          * player to main()
@@ -109,14 +109,19 @@ struct player* play_game(struct player players[]) {
                     normal_print("There was no winner as the board wall "
                             "filled up without the minimum number of color "
                             "tokens in a row being found.\n");
-                    getchar();
                     return NULL;
                 }
-                else if (player_turn(thegame.current)==IR_SUCCESS)
+                else {
+                    while ((result =player_turn(thegame.current))!=IR_SUCCESS) {
+                        if (result == IR_RTM)
+                            return NULL;
+                    }
                     swap_players(&thegame.current, &thegame.other);
-                else return thegame.other;
+                }
             }
-
+            print_board(thegame.board);
+            print_winner(thegame.other->name, thegame.other->score, thegame.other->token);
+            return thegame.other;
         }
 
         /* the game loop - continue until there is a winner or all spots have

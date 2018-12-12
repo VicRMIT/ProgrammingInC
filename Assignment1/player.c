@@ -47,7 +47,7 @@ enum input_result player_turn(struct player* curplayer) {
     do { 
         while ((result=get_player_turn(getTurn)) != IR_SUCCESS) {
             if (result == IR_RTM)
-                return IR_RTM;        
+                return IR_RTM; 
         }
         turnCoordinate.x = getTurn[XPOSITION]-'0';
         turnCoordinate.y = getTurn[YPOSITION]-'0';

@@ -58,6 +58,18 @@ void print_symbol(enum cell symbol) {
     }
 }
 
+void print_winner(char s[], int score, enum cell token) {
+
+    int colorNum;
+    if (token==C_CROSS)
+        colorNum=COL_BLUE;
+    else
+        colorNum=COL_RED;
+    
+    normal_print("The winner was  %s%s%s, with a score of %d.\n",
+            color_strings[colorNum],s,color_strings[COL_RESET],score);
+}
+
 /** 
  * prints the name of the current player and the current player's score
  **/
@@ -147,12 +159,10 @@ enum input_result get_player_turn(char coordString[]) {
             error_print("That entry was too long, please enter "
                     "comma delimited coordinates x,y: ");
             read_rest_of_line();
-            return IR_FAILURE;
         }
         else if(isdigit(input[0])==FALSE || isdigit(input[2])==FALSE || input[1]!=',') {
             error_print("That entry is not a coordinate, please enter "
                     "comma delimited coordinates x,y: ");
-            return IR_FAILURE; 
         } else {
             strcpy(coordString, input);
             return IR_SUCCESS;
