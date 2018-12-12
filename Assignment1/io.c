@@ -10,9 +10,6 @@
 #include "player.h"
 
 #define menuOptionSize 1
-#define crossColor 3
-#define noughtColor 0
-#define resetColor 6
 #define breakChar 1
 /**
  * The colour codes for printing out coloured output. You just print out the
@@ -47,10 +44,10 @@ static void read_rest_of_line(void) {
 void print_symbol(enum cell symbol) {
     switch(symbol) {
         case C_NOUGHT:
-            normal_print(" %sO%s |", color_strings[noughtColor], color_strings[resetColor]);
+            normal_print(" %sO%s |", color_strings[COL_RED], color_strings[COL_RESET]);
             break;
         case C_CROSS:
-            normal_print(" %sX%s |", color_strings[crossColor], color_strings[resetColor]);
+            normal_print(" %sX%s |", color_strings[COL_BLUE], color_strings[COL_RESET]);
             break;
         case C_BLANK:
             normal_print("   |");
@@ -67,13 +64,13 @@ void print_symbol(enum cell symbol) {
 void print_game_status(char s[], int score, enum cell token) { 
     int colorNum;
     if (token==C_CROSS)
-        colorNum=crossColor;
+        colorNum=COL_BLUE;
     else
-        colorNum=noughtColor;
+        colorNum=COL_RED;
     
     normal_print("It is %s%s%s's turn to make a move, and their score is %d. Please enter "
             "a coordinate to place your piece in comma separated format with the column "
-            "first and the row second: ",color_strings[colorNum],s,color_strings[resetColor],score);
+            "first and the row second: ",color_strings[colorNum],s,color_strings[COL_RESET],score);
 } 
 
 /**
@@ -154,11 +151,6 @@ enum input_result get_player_turn(char coordString[]) {
         }
         else if(isdigit(input[0])==FALSE || isdigit(input[2])==FALSE || input[1]!=',') {
             error_print("That entry is not a coordinate, please enter "
-                    "comma delimited coordinates x,y: ");
-            return IR_FAILURE;
-        } else if (input[0]-'0' < 1 || input[0]-'0' > BOARDHEIGHT  
-                || input[2]-'0' < 1 || input[2]-'0' > BOARDWIDTH){
-            error_print("That entry is not a valid coordinate, please enter "
                     "comma delimited coordinates x,y: ");
             return IR_FAILURE; 
         } else {

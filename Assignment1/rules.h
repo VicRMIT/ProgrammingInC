@@ -13,6 +13,13 @@
 #ifndef RULES_H
 #define RULES_H
 
+enum direction {
+        EAST,
+        SOUTH_EAST,
+        SOUTH,
+        SOUTH_WEST
+};
+
 struct game;
 struct player;
 
@@ -21,6 +28,8 @@ struct coordinate {
 };
 
 BOOLEAN is_valid_move(const struct coordinate *, gameboard);
+
+int check_consecutive(int i, int j, struct player *, enum direction);
 
 void apply_move(const struct coordinate *, struct player *);
 

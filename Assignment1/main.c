@@ -20,10 +20,9 @@ int main(void) {
         /* pointer to the winner - at the end of the game if this is not NULL,
          * this is the winner of the game just played
          */
-        /*
-         * struct player *winner;
-         * NOT USED FOR ASSIGNMENT 1B
-         */
+        
+        struct player *winner;
+        
         /* scoreboard for the program - add winners to this scoreboard */
         struct score scores[NUM_SCORES];
         /* menuSelection char to process user selections on menu */
@@ -38,9 +37,12 @@ int main(void) {
 
             menuSelected = menuSelection();
             if (menuSelected == PLAY_GAME) {
-                play_game(players);
+                if ((winner = play_game(players))!=NULL) {
+                    /* print winnter dialog
+                     * add to scoreboard */
+                }
             } else if (menuSelected == DISPLAY_SCORE) {
-                
+                /* display scoreboard code */                
             }
             
         } while (menuSelected !=EXIT_PROG); 
