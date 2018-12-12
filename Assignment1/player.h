@@ -19,6 +19,9 @@
  * data structure definitions for the player module
  **/
 #define NAMELEN 20
+#define SIZECOORDSTRING 4
+#define XPOSITION 0
+#define YPOSITION 2
 
 /**
  * predeclare the game struct so that we can use pointers to it in this header

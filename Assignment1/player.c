@@ -38,5 +38,23 @@ enum input_result player_init(struct player* curplayer, int playernum,
  * actions, a function should be called in another module.
  **/
 enum input_result player_turn(struct player* curplayer) {
-        return IR_FAILURE;
+    char getTurn[SIZECOORDSTRING]={0}; 
+    struct coordinate turnCoordinate;
+    enum input_result result;
+
+    print_game_status(curplayer->name, curplayer->score, curplayer->token);
+    
+    do { 
+        while ((result=get_player_turn(getTurn)) != IR_SUCCESS) {
+            if (result == IR_RTM)
+                return IR_RTM;        
+        }
+        turnCoordinate.x = getTurn[XPOSITION]-'0';
+        turnCoordinate.y = getTurn[YPOSITION]-'0';
+    } while (is_valid_move(&turnCoordinate, curplayer->curr_game->board) != TRUE);
+
+    apply_move(&turnCoordinate, curplayer);
+    calculate_score(curplayer);
+
+    return IR_SUCCESS;  
 }

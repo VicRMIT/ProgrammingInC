@@ -10,6 +10,9 @@
 #include "player.h"
 
 #define menuOptionSize 1
+#define crossColor 3
+#define noughtColor 0
+#define resetColor 6
 #define breakChar 1
 /**
  * The colour codes for printing out coloured output. You just print out the
@@ -44,10 +47,10 @@ static void read_rest_of_line(void) {
 void print_symbol(enum cell symbol) {
     switch(symbol) {
         case C_NOUGHT:
-            normal_print(" O |");
+            normal_print(" %sO%s |", color_strings[noughtColor], color_strings[resetColor]);
             break;
         case C_CROSS:
-            normal_print(" X |");
+            normal_print(" %sX%s |", color_strings[crossColor], color_strings[resetColor]);
             break;
         case C_BLANK:
             normal_print("   |");
@@ -62,17 +65,15 @@ void print_symbol(enum cell symbol) {
  * prints the name of the current player and the current player's score
  **/
 void print_game_status(char s[], int score, enum cell token) { 
-    int resetNum;
     int colorNum;
     if (token==C_CROSS)
-        colorNum=3;
+        colorNum=crossColor;
     else
-        colorNum=0;
-    resetNum = 6;
+        colorNum=noughtColor;
     
     normal_print("It is %s%s%s's turn to make a move, and their score is %d. Please enter "
             "a coordinate to place your piece in comma separated format with the column "
-            "first and the row second: ",color_strings[colorNum],s,color_strings[resetNum],score);
+            "first and the row second: ",color_strings[colorNum],s,color_strings[resetColor],score);
 } 
 
 /**
@@ -138,6 +139,38 @@ int error_print(const char format[], ...) {
         return output_chars;
 }
 
+enum input_result get_player_turn(char coordString[]) {
+        
+    char input[SIZECOORDSTRING] = {0};
+    while (fgets(input, sizeof(input)+1,stdin) != NULL) {
+        if(input[0] == '\n') {
+            return IR_RTM; 
+        }
+        else if(input[sizeof(input)-1] != '\n' && input[sizeof(input)-1] != 0 ) {
+            error_print("That entry was too long, please enter "
+                    "comma delimited coordinates x,y: ");
+            read_rest_of_line();
+            return IR_FAILURE;
+        }
+        else if(isdigit(input[0])==FALSE || isdigit(input[2])==FALSE || input[1]!=',') {
+            error_print("That entry is not a coordinate, please enter "
+                    "comma delimited coordinates x,y: ");
+            return IR_FAILURE;
+        } else if (input[0]-'0' < 1 || input[0]-'0' > BOARDHEIGHT  
+                || input[2]-'0' < 1 || input[2]-'0' > BOARDWIDTH){
+            error_print("That entry is not a valid coordinate, please enter "
+                    "comma delimited coordinates x,y: ");
+            return IR_FAILURE; 
+        } else {
+            strcpy(coordString, input);
+            return IR_SUCCESS;
+        }
+    }
+    normal_print("\n");
+    return IR_RTM;
+
+}
+
 /**
  * fgets conditional that checks for newline or ctrl-d, entries that are too long
  * and a successful entry. Returns the appropriate value.
@@ -148,7 +181,7 @@ enum input_result get_name(char curName[]) {
         if(name[0] == '\n') {
             return IR_RTM; 
         }
-        if(name[sizeof(name)-1] != '\n' && name[sizeof(name)-1] != 0 ) {
+        else if(name[sizeof(name)-1] != '\n' && name[sizeof(name)-1] != 0 ) {
             error_print("That name is too long, please enter "
                     "another: ");
             read_rest_of_line();

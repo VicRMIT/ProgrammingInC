@@ -13,13 +13,19 @@
  * validates that the move passed in would be legal if applied
  **/
 BOOLEAN is_valid_move(const struct coordinate *coord, gameboard board) {
+    if (board[coord->y-1][coord->x-1] == C_BLANK)
+        return TRUE; 
+    else {
+        error_print("That is not a valid move! Please enter a different move in x,y format: ");
         return FALSE;
+    }
 }
 
 /**
  * applies the move to the board
  **/
 void apply_move(const struct coordinate *coord, struct player *curplayer) {
+    curplayer->curr_game->board[coord->y-1][coord->x-1] = curplayer->token;
 }
 
 /**
@@ -36,5 +42,8 @@ void calculate_score(struct player *curplayer) {
  * than or equal to the current player's token being wincount times in a row.
  **/
 BOOLEAN is_winner(struct player *curplayer) {
+    if(curplayer->score == curplayer->curr_game->wincount)
+       return TRUE;
+    else
         return FALSE;
 }

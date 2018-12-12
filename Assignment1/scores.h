@@ -16,7 +16,7 @@
 #define SCORES_H
 
 /**
- * a socre entry on the score board
+ * a score entry on the score board
  **/
 struct score {
         char player[NAMELEN + 1];

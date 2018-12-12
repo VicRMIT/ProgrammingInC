@@ -42,4 +42,6 @@ typedef enum cell gameboard[BOARDHEIGHT][BOARDWIDTH];
  **/
 void board_init(gameboard);
 
+BOOLEAN check_draw_condition(gameboard);
+
 #endif /* BOARD_H */

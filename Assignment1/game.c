@@ -103,10 +103,20 @@ struct player* play_game(struct player players[]) {
          */
 
         if (init_game(&thegame)!=FALSE) {
-            print_board(thegame.board);
-            print_game_status(thegame.current->name, thegame.current->score, 
-                thegame.current->token);
-            getchar();
+            while (is_winner(thegame.other)!=TRUE) {
+                print_board(thegame.board);
+                if (check_draw_condition(thegame.board)==TRUE){
+                    normal_print("There was no winner as the board wall "
+                            "filled up without the minimum number of color "
+                            "tokens in a row being found.\n");
+                    getchar();
+                    return NULL;
+                }
+                else if (player_turn(thegame.current)==IR_SUCCESS)
+                    swap_players(&thegame.current, &thegame.other);
+                else return thegame.other;
+            }
+
         }
 
         /* the game loop - continue until there is a winner or all spots have
@@ -126,7 +136,7 @@ struct player* play_game(struct player players[]) {
         /* replace this return statement with appropriate logic for determining 
          * the winner and return that 
          */
-        return NULL;
+    return NULL;
 }
 
 /**

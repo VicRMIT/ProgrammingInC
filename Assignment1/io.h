@@ -92,6 +92,8 @@ void print_board(gameboard);
 
 void print_game_status(char s[], int, enum cell);
 
+enum input_result get_player_turn(char s[]);
+
 enum input_result get_win_count(int *s);
 
 enum input_result get_name(char s[]);

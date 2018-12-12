@@ -27,3 +27,18 @@ void board_init(gameboard aboard) {
 
 /* you may wish to add further functions for the managing of the gameboard here
  */
+BOOLEAN check_draw_condition(gameboard aboard) {
+    int i;
+    int j;
+    /* 
+     * Iterates through height and width settings
+     * all to C_BLANK
+     */
+    for (i = 0; i < BOARDHEIGHT; i++) {
+        for (j = 0; j < BOARDWIDTH; j++) {
+            if (aboard[i][j]==C_BLANK)
+                return FALSE;
+        }
+    } 
+    return TRUE;
+}

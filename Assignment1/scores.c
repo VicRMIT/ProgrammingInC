@@ -13,6 +13,10 @@
  **/
 
 void scoreboard_init(struct score scores[]) {
+    int i;
+    for (i=0; i<sizeof(*scores); i++) {
+        scores[i].score = 0;
+    }
 }
 
 /**

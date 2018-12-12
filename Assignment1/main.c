@@ -40,7 +40,7 @@ int main(void) {
             if (menuSelected == PLAY_GAME) {
                 play_game(players);
             } else if (menuSelected == DISPLAY_SCORE) {
-
+                
             }
             
         } while (menuSelected !=EXIT_PROG); 
