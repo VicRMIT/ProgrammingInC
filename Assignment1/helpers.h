@@ -15,6 +15,8 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+int compare_score_asc(const void *a, const void *b);
+int compare_score_desc(const void *a, const void *b);
 void remove_newlines(char s[]);
 /* place declarations of datastructures and constants as well as functions
  * for this module here */

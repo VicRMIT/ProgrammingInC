@@ -7,6 +7,18 @@
  * study period 4, 2018.
  *****************************************************************************/
 #include "helpers.h"
+#include "scores.h"
+int compare_score_asc(const void *a, const void *b) {
+    struct score *scoreA = (struct score *) a;
+    struct score *scoreB = (struct score *) b; 
+    return (scoreA->score-scoreB->score);
+}
+int compare_score_desc(const void *a, const void *b) {
+    struct score *scoreA = (struct score *) a;
+    struct score *scoreB = (struct score *) b; 
+    return (scoreB->score-scoreA->score);
+}
+
 /*
  * Function for removing new line characters. While loop returns the address
  * of each newline character until there aren't any left, and set it to the

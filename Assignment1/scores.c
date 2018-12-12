@@ -7,6 +7,7 @@
  * study period 4, 2018.
  *****************************************************************************/
 #include "scores.h"
+#include "helpers.h"
 /**
  * static scoreboard that you will populate with data on each game winner. It
  * is static which means it's only accessible from inside this module
@@ -24,7 +25,18 @@ void scoreboard_init(struct score scores[]) {
  * scores are at the top
  **/
 BOOLEAN scoreboard_add(struct score scores[], const struct player* winner) {
-        return FALSE;
+    int i;
+    qsort(scores, NUM_SCORES, sizeof(struct score), compare_score_asc);
+
+    for (i=0; i<NUM_SCORES; i++) {
+        if (winner->score > scores[i].score) {
+            strcpy(scores[i].player, winner->name);
+            scores[i].score = winner->score;
+            i = NUM_SCORES;
+        }
+    }
+    qsort(scores, NUM_SCORES, sizeof(struct score), compare_score_desc);
+    return TRUE;
 }
 
 /**
@@ -32,4 +44,18 @@ BOOLEAN scoreboard_add(struct score scores[], const struct player* winner) {
  * assignment specification
  **/
 void scoreboard_print(struct score scores[]) {
+    int scoresPrinted;
+    int i;
+    scoresPrinted = 0;
+    print_scoreboard_title();
+    for (i=0; i<NUM_SCORES; i++) {
+        if (scores[i].score != 0) {
+            if (scoresPrinterd == 0)
+                print_scoreboard_header();
+            print_scoreboard(scores[i].player, scores[i].score);
+            scoresPrinted++;
+        }
+    }
+    if (scoresPrinted == 0)
+        print_no_score();
 }

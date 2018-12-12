@@ -38,11 +38,11 @@ int main(void) {
             menuSelected = menuSelection();
             if (menuSelected == PLAY_GAME) {
                 if ((winner = play_game(players))!=NULL) {
-                    /* print winnter dialog
-                     * add to scoreboard */
+                    scoreboard_add(scores, winner);
                 }
             } else if (menuSelected == DISPLAY_SCORE) {
-                /* display scoreboard code */                
+                scoreboard_print(scores);
+                getchar();                
             }
             
         } while (menuSelected !=EXIT_PROG); 
