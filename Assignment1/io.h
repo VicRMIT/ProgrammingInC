@@ -96,6 +96,14 @@ enum input_result get_player_turn(char s[]);
 
 void print_winner(char s[], int, enum cell);
 
+void print_scoreboard_title();
+
+void print_scoreboard_header();
+
+void print_score(char s[], int);
+
+void print_no_score();
+
 enum input_result get_win_count(int *s);
 
 enum input_result get_name(char s[]);

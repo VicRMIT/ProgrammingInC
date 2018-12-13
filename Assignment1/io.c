@@ -37,6 +37,51 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
+void print_scoreboard_title() {
+    char title[] = "TIC-TAC-N High Scores";
+    int i;
+    normal_print("%s\n",title);
+    for (i=0; i<strlen(title); i++) {
+        normal_print("=");
+    }
+    normal_print("\n");
+}
+
+void print_scoreboard_header() {
+    int i;
+    int totalLength;
+    char spaces[] = "                ";
+    char divider[] = "| ";
+    char title1[]="Name";
+    char title2[]="Score"; 
+    normal_print("%s", title1);
+    normal_print("%s", spaces);
+    normal_print("%s", divider);
+    normal_print("%s", title2);
+    normal_print("%s\n", spaces);
+    totalLength = strlen(spaces)*2 + strlen(divider) + strlen(title1)
+        + strlen(title2);
+    for (i=0; i<totalLength; i++) {
+        normal_print("-");
+    }
+    normal_print("\n");
+}
+
+void print_score(char name[], int score) {
+    char divider[] = "| ";
+    int i;
+    normal_print("%s", name);
+    for (i=strlen(name); i<20; i++)
+        normal_print(" ");
+    normal_print("%s", divider);
+    normal_print("%d", score);
+    normal_print("\n");
+}
+
+void print_no_score() {
+    normal_print("No high scores have been recorded yet\n");
+}
+
 /**
  * get symbol passed as an argument and print the appropriate characters
  * to the string.
@@ -66,7 +111,7 @@ void print_winner(char s[], int score, enum cell token) {
     else
         colorNum=COL_RED;
     
-    normal_print("The winner was  %s%s%s, with a score of %d.\n",
+    normal_print("The winner was %s%s%s, with a score of %d.\n",
             color_strings[colorNum],s,color_strings[COL_RESET],score);
 }
 

@@ -50,9 +50,9 @@ void scoreboard_print(struct score scores[]) {
     print_scoreboard_title();
     for (i=0; i<NUM_SCORES; i++) {
         if (scores[i].score != 0) {
-            if (scoresPrinterd == 0)
+            if (scoresPrinted == 0)
                 print_scoreboard_header();
-            print_scoreboard(scores[i].player, scores[i].score);
+            print_score(scores[i].player, scores[i].score);
             scoresPrinted++;
         }
     }
