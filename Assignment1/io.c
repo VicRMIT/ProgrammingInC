@@ -37,6 +37,11 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
+/*
+ * The following print functions are self-explanatory. They are separated
+ * for better generalisation.
+ */
+
 void print_scoreboard_title() {
     char title[] = "TIC-TAC-N High Scores";
     int i;

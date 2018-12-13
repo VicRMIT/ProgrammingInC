@@ -15,7 +15,7 @@ void board_init(gameboard aboard) {
     int i;
     int j;
     /* 
-     * Iterates through height and width settings
+     * Iterates through height and width setting
      * all to C_BLANK
      */
     for (i = 0; i < BOARDHEIGHT; i++) {
@@ -31,8 +31,9 @@ BOOLEAN check_draw_condition(gameboard aboard) {
     int i;
     int j;
     /* 
-     * Iterates through height and width settings
-     * all to C_BLANK
+     * Iterates through height and width
+     * with draw condition false if any blanks
+     * remain.
      */
     for (i = 0; i < BOARDHEIGHT; i++) {
         for (j = 0; j < BOARDWIDTH; j++) {

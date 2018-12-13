@@ -43,7 +43,12 @@ enum input_result player_turn(struct player* curplayer) {
     enum input_result result;
 
     print_game_status(curplayer->name, curplayer->score, curplayer->token);
-    
+    /* 
+     * Nested loops that continue until a valid coordinate is entered.
+     * The first loop returns a valid coordinate entry.
+     * The second loop checks that the valid coordinate is also a
+     * valid move.  
+     */ 
     do { 
         while ((result=get_player_turn(getTurn)) != IR_SUCCESS) {
             if (result == IR_RTM)

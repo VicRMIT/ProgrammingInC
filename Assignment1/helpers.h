@@ -15,6 +15,11 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+/*
+ * Comparison function declarations were developed with reference to cplusplus
+ * library documentation. See [1] in readme.txt.
+ */
+
 int compare_score_asc(const void *a, const void *b);
 int compare_score_desc(const void *a, const void *b);
 void remove_newlines(char s[]);

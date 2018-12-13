@@ -103,6 +103,14 @@ struct player* play_game(struct player players[]) {
          */
 
         if (init_game(&thegame)!=FALSE) {
+        
+            /* the game loop - continue until there is a winner or all spots have
+             * been filled up
+             */
+            /* if the attempt to move failed , reprompt for the move */
+            /* if the game has been won or the board is full, the game is
+             * over */
+
             while (is_winner(thegame.other)!=TRUE) {
                 print_board(thegame.board);
                 if (check_draw_condition(thegame.board)==TRUE){
@@ -119,27 +127,21 @@ struct player* play_game(struct player players[]) {
                     swap_players(&thegame.current, &thegame.other);
                 }
             }
+            /* when the game is over, we will reprint out the board and detail
+             * who the winner is, if there was a winner. If the board is full the
+             * game is drawn and if the game was quit early such as by pressing
+             * enter or ctrl-d on a new line, we will also print out that
+             * information
+            */
             print_board(thegame.board);
             print_winner(thegame.other->name, thegame.other->score, thegame.other->token);
             return thegame.other;
         }
 
-        /* the game loop - continue until there is a winner or all spots have
-         * been filled up
-         */
-                /* if the attempt to move failed , reprompt for the move */
-                /* if the game has been won or the board is full, the game is
-                 * over */
 
-        /* when the game is over, we will reprint out the board and detail
-         * who the winner is, if there was a winner. If the board is full the
-         * game is drawn and if the game was quit early such as by pressing
-         * enter or ctrl-d on a new line, we will also print out that
-         * information
-         */
-
-        /* replace this return statement with appropriate logic for determining 
-         * the winner and return that 
+        /* 
+         * Catch-all return. Technically, program execution should never reach this line
+         * of code. 
          */
     return NULL;
 }
@@ -151,11 +153,14 @@ struct player* play_game(struct player players[]) {
  **/
 void swap_players(struct player** first, struct player** second) {
     /*
-     * The parameters are pointers to pointers. The first level pointers should
-     * not be changed otherwise we lose the address to the player structs. We need
-     * to swap the pointers to the pointers instead. Dereference first gives the pointer
-     * to player A. We then set it to equal the pointer to player B. We then dereference second
-     * and set it to the pointer to player A, stored in 'firstPlayer'. 
+     * The arguments are pointers to pointers:
+     * [Player1 in memory] <-- [*pointer to Player1] <-- [**first is pointer to pointer]
+     * [Player2 in memory] <-- [*pointer to Player2] <-- [**second is pointer to pointer]
+     *                         /\
+     *                         Access pointers by dereferencing the pointer to the pointer
+     * Saves the address of Player1 in firstPlayer
+     * Saves the address of Player2 in Player1
+     * Saves the address of firstPlayer in Player2
      */
     struct player* firstPlayer;
     firstPlayer = * first;

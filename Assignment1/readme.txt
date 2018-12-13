@@ -13,7 +13,7 @@
  enter 1, 2, or 3 and hit return to select a menu option.
 
  Option 1 starts a new game.
- Option 2 shows the scoreboard [NOT YET IMPLEMENTED].
+ Option 2 shows the scoreboard
  Option 3 quits the program.
  An invalid selection will request you to enter another input.
 
@@ -30,8 +30,16 @@
  The player with crosses will be shown in blue. The player with noughts will be shown in
  red.
 
+ The game will then prompt users for turns until one user has achieved the minimum
+ winning score. Moves are checked to make sure that they are valid. Draw conditions
+ are detected.
+
+ When option 2 is selected, a scoreboard will be shown. Press any key to return to the
+ main menu.
+
  Known bugs: 
- There are no currently known bugs. [GAME NOT YET FULLY IMPLEMENTED]
+ While not a bug per se, the players are able to enter the same player name.
+ Also note that the code is not generalisable to more than two players.
 
  Code attributions: 
  Code is my own with the exception of startup code provided by Paul Miller. No blocks
@@ -41,4 +49,12 @@
  C help. https://site.google.com/a/rmit.edu.au/programming-in-c---notes has also been
  used as a reference for C functions.
 
+ In particular, I referred to the documentation for qsort at
+ [1] www.cplusplus.com/reference/cstdlib/qsort/
+ Primarily, how to declare a comparison method.
 
+ I also referred to sample code at:
+ [2] https://stackoverflow.com/questions/6105513/need-help-using-qsort-with-an-array-of-structs
+ for the conversion of const void input parameters into a score structure type.
+
+ The above two code usages are noted in the helpers.c/h source/header files where appropriate.

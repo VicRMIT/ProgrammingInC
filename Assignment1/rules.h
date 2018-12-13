@@ -13,6 +13,10 @@
 #ifndef RULES_H
 #define RULES_H
 
+/*
+ * The following enum is used to set iterators for traversing the board
+ * when checking for the longest consecutive token position on the board.
+ */
 enum direction {
         EAST,
         SOUTH_EAST,
