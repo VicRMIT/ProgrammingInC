@@ -42,7 +42,7 @@ int main(void) {
                 }
             } else if (menuSelected == DISPLAY_SCORE) {
                 scoreboard_print(scores);
-                getchar();                
+                /* getchar();*/                
             }
             
         } while (menuSelected !=EXIT_PROG); 

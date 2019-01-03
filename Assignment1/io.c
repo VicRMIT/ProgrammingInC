@@ -84,7 +84,7 @@ void print_score(char name[], int score) {
 }
 
 void print_no_score() {
-    normal_print("No high scores have been recorded yet\n");
+    normal_print("No high scores have been recorded yet\n\n");
 }
 
 /**
@@ -295,7 +295,7 @@ int menuSelection(void) {
     char menuChoice[menuOptionSize + breakChar]; 
     normal_print("Welcome to TicTacN\n"); 
     normal_print("------------------\n"); 
-    normal_print("1. Play the Game\n"); 
+    normal_print("1. Play The Game\n"); 
     normal_print("2. Display high scores\n"); 
     normal_print("3. Exit the program \n"); 
     normal_print("Please enter the number of the item you wish to select: "); 
