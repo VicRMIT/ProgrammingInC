@@ -1,7 +1,7 @@
 /******************************************************************************
- * Student Name    :
- * RMIT Student ID :
- * COURSE CODE     :
+ * Student Name    : Victor Ageev
+ * RMIT Student ID : s3732094
+ * COURSE CODE     : CPT220
  *
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
@@ -17,4 +17,12 @@
  */
 
 void print_usage(void);
+
+#define NUMARGS 2
+
+enum arg_position
+{
+    PREPEND, INPUT
+};
+
 #endif /* MAIN_H */

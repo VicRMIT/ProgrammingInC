@@ -1,7 +1,7 @@
 /******************************************************************************
- * Student Name    :
- * RMIT Student ID :
- * COURSE CODE     :
+ * Student Name    : Victor Ageev
+ * RMIT Student ID : s3732094
+ * COURSE CODE     : CPT220
  *
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
@@ -17,6 +17,8 @@
 #ifndef FILEIO_H
 #define FILEIO_H
 
+#define LINELEN 80
+#define EXTRASPACES 2
 BOOLEAN load_file(const char[], struct line_list*);
 BOOLEAN save_file(const char[], const struct line_list*);
 

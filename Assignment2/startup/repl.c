@@ -1,7 +1,7 @@
 /******************************************************************************
- * Student Name    :
- * RMIT Student ID :
- * COURSE CODE     :
+ * Student Name    : Victor Ageev
+ * RMIT Student ID : s3732094
+ * COURSE CODE     : CPT220
  *
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
@@ -71,6 +71,18 @@ static void read_rest_of_line(void) {
  * reads input then decides which command to invoke, then invokeds that command.
  **/
 void repl(const struct command commands[], char filename[]) {
+
+    struct line_list lines;
+    line_list_init(&lines);
+
+    if (filename==NULL) {
+        lines.head = NULL;
+        lines.num_lines = 0;
+    } else {
+        load_file(filename, &lines);
+    }
+    list_print(&lines);
+    save_file(filename, &lines);
 }
 
 /**

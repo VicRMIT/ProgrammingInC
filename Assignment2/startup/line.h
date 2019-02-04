@@ -1,12 +1,11 @@
 /******************************************************************************
- * Student Name    :
- * RMIT Student ID :
- * COURSE CODE     :
+ * Student Name    : Victor Ageev
+ * RMIT Student ID : s3732094
+ * COURSE CODE     : CPT220
  *
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
  *****************************************************************************/
-
 #include "shared.h"
 #include <assert.h>
 #include <ctype.h>
@@ -36,4 +35,9 @@ struct line_list {
  * function prototypes for allocating, manipulating and freeing the line_list
  * and its components go here.
  **/
+void line_list_init(struct line_list * line_list);
+BOOLEAN addnode(struct line_list * line_list, char[], struct line * data);
+void list_print(struct line_list*);
+void list_free(struct line_list * line_list);
+
 #endif
