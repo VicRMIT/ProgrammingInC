@@ -7,19 +7,17 @@
  * study period 4, 2018.
  *****************************************************************************/
 
+#include "shared.h"
+#include "line.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-#include "shared.h"
-#include "line.h"
 
 #ifndef FILEIO_H
 #define FILEIO_H
 
-#define LINELEN 80
-#define EXTRASPACES 2
 BOOLEAN load_file(const char[], struct line_list*);
 BOOLEAN save_file(const char[], const struct line_list*);
-
+FILE* gwopen(const char* fname);
 #endif

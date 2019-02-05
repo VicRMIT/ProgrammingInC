@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "shared.h"
 
 void * safe_malloc(size_t, unsigned long );
 void * safe_calloc(size_t, size_t, unsigned long);

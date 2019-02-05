@@ -6,7 +6,6 @@
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
  *****************************************************************************/
-
 #include "main.h"
 
 int main(int argc, char* argv[]) {
@@ -34,7 +33,7 @@ int main(int argc, char* argv[]) {
         /* implement behaviour based on the number of arguments passed in */
         /* if there are invalid arguments, display appropriate
          * error messages and exit */
-        return EXIT_FAILURE;
+    return EXIT_FAILURE;
 }
 
 /**
@@ -43,7 +42,7 @@ int main(int argc, char* argv[]) {
 void print_usage(void) {
     printf("You should run this program by passing at most 1"
             " argument:\n\n\t./picedit [optional] inputfile\n\n"
-            "Where inputfile is an optional original file. If no"
-            "input file is provided, picedit will start a new"
-            "documents");
+            "Where inputfile is an optional original file. If no "
+            "input file is provided, picedit will start a new "
+            "document.\n");
 }
