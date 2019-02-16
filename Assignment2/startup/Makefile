@@ -41,4 +41,4 @@ clean:
 	rm -f *.o picedit
 
 sanitize:CFLAGS+=-fsanitize=address
-
+sanitize:clean all

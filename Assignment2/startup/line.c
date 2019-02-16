@@ -54,78 +54,112 @@ struct line_list* line_list_init(void) {
         perror("malloc failed");
         return NULL;
     }
-
-
+    newList->head = NULL;
+    newList->file_name = NULL;
+    newList->num_lines = 0;
+    return newList;
 }
 
 
-BOOLEAN addnode(struct line_list* lines, char currentLine[], struct line * data)
+BOOLEAN list_insert(struct line_list* lines,const char currentLine[], long index)
 {
-    struct line_node * current, *prev;
-    struct line_node *new;
+    long count;
+    struct line_node * current, *prev, *new;
+    struct line* newLine;
 
     prev = NULL;
 
-    assert(lines);
-    assert(data);
-    
-    data->data = currentLine;
-
-    new = safemalloc(sizeof(struct line_node));
-
-    new->data = data;
-    new->data->lineno=lines->num_lines+1;
-    new->next = NULL;
-
-    if(lines->head == NULL)
-    {
-        lines->head = new;
-        ++lines->num_lines;
-        return TRUE;
+    if (index > lines->num_lines + 1 || index <=0) {
+        error_print("%ld is outside the list range.\n", index);
+        return FALSE;
     }
     
-    current = lines->head;
-
-    while(current != NULL)
-    {
-        prev=current;
-        current=current->next;
+    newLine = line_init(currentLine, index);
+    if (!newLine) {
+        return FALSE;
     }
 
-    if(!current) {
-        prev->next = new;
-        new->next = current;
+    new = line_node_init(newLine);
+    if (!new) {
+        line_free(newLine);
+        return FALSE;
+    }
+
+    for (count=1, current = lines->head; count<index; ++count) {
+        prev = current;
+        current = current->next;
+    }
+
+    if(!prev) {
+        new->next = lines->head;
+        lines->head = new->next;
+    } else {
+        prev->next=new;
+        if (index<lines->num_lines) {
+            new->next = current;
+        }
+    }
+
+    for (; current; current=current->next) {
+        ++current->data->lineno;
     }
 
     ++lines->num_lines;
     return TRUE;
 }
 
-void list_print(struct line_list* line_list)
-{
-    struct line_node * current = line_list->head;
-    while(current!=NULL)
-
-    {
-        struct line_node * next;
-        next = current;
-        current = current->next;
-        normal_print("%li",next->data->lineno);
-        normal_print(": ");
-        normal_print("%s",next->data->data);
-    }
+BOOLEAN list_append(struct line_list* theList, const char theLine[]) {
+    return list_insert(theList, theLine, theList->num_lines+1);
 }
 
-void list_free(struct line_list * line_list)
+BOOLEAN linelist_print(const struct line_list* theList, FILE* out)
 {
-    struct line_node * current = line_list->head;
+    struct line_node * current = theList->head;
     while(current!=NULL)
-
-    {
-        struct line_node * next;
-        next = current;
+    {   
+        if (!line_print(current->data, out)) {
+            return FALSE;
+        }
         current = current->next;
-        free(next->data);
-        free(next);
     }
+    return TRUE;
+}
+
+BOOLEAN line_print(const struct line* theLine, FILE* out) {
+    if (out ==stdout || out ==stderr) {
+        if (fprintf(out, "%ld: %s\n", theLine->lineno, theLine->data) < 0) {
+            error_print("%s\n", strerror(ferror(out)));
+            return FALSE;
+        }
+    } else {
+        if (fprintf(out, "%s\n", theLine->data) < 0) {
+            error_print("%s\n", strerror(ferror(out)));
+        }
+    }
+    return TRUE;
+}
+
+void list_free(struct line_list * aList)
+{
+    struct line_node* current, *nextnode;
+    current = aList->head;
+
+    while(current) {
+        nextnode = current->next;
+        node_free(current);
+        current = nextnode;;
+    }
+    free(aList->file_name);
+    free(aList);
+}
+
+void node_free(struct line_node* node)
+{
+    line_free(node->data);
+    free(node);
+}
+
+void line_free(struct line* aLine) {
+    free(aLine->data);
+    free(aLine);
 }

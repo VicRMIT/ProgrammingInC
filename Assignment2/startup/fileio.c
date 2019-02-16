@@ -14,36 +14,46 @@
  **/
 BOOLEAN load_file(const char fname[], struct line_list* thelist) {
     char charline[BUFSIZ + EXTRACHARS];
-    struct line newLine;
-    FILE * input = fopen(fname, "r"); 
-    file_name  = strdup(fname);
-    line_init(&newLine); 
- /*   newLine = safemalloc(sizeof(struct line));*/
+    char* tok;
+    FILE* input = fopen(fname, "r"); 
         
-    if((input = fopen(file_name, "r")) == NULL)
+    if(!input)
     {
-        error_print("Failed to open file");
+        error_print("Failed to open file\n");
         return FALSE;
     }
 
-    thelist->file_name = file_name;
-
-    while(fgets(charline, BUFSIZ, input) != NULL)
+    while(fgets(charline, BUFSIZ + EXTRACHARS, input))
     {
         if(charline[strlen(charline)-1]!='\n')
         {
-            fprintf(stderr, "Implement fold");
-            return FALSE;
+            if(!feof(input)) {
+                error_print("%s\n", strerror(errno));
+                return FALSE;
+            }
+        } else {
+            charline[strlen(charline) - 1] = 0;
         }
-        charline[strlen(charline)]=0;
-       
-        if(!addnode(thelist, charline, &newLine))
-        {
-            fprintf(stderr, "Error adding lines");
-            return FALSE;
+        fold(charline, LINELEN);
+        if (strlen(charline)==0) {
+            if(!list_append(thelist, "")) {
+                return FALSE;
+            }
+        } else {
+            tok = strtok(charline,"\n");
+            while(tok) {
+                if(!list_append(thelist, tok)) {
+                    return FALSE;
+                }
+                tok = strtok(NULL, "\n");
+            }
         }
     }
     fclose(input);
+    if(thelist->file_name) {
+        free(thelist->file_name);
+    }
+    thelist->file_name = strdup(fname);
     return TRUE;
 }
 
@@ -52,35 +62,17 @@ BOOLEAN load_file(const char fname[], struct line_list* thelist) {
  **/
 BOOLEAN save_file(const char fname[], const struct line_list* thelist) {
     FILE * output;
-    struct line_node * current = thelist->head;
-    
-    output=gwopen(fname);
-
-    while(current!=NULL)
-
-    {
-        struct line_node * next;
-        next = current;
-        current = current->next;
-        if(fprintf(output, "%s\n", next->data->data) < 0)
-        {
-            error_print("Failed to save file");
-            return FALSE;
-        } 
+    output = fopen(fname, "w"); 
+    if(!output) {
+        error_print("%s\n", strerror(errno));
+        return FALSE;
+    }
+    if(!linelist_print(thelist, output)) {
+        fclose(output);
+        return FALSE;
     }
     fclose(output);
     return TRUE;
 
 }
 
-FILE* gwopen(const char * fname)
-{
-    FILE * fp;
-    if((fp=fopen(fname,"w"))==NULL)
-    {
-        error_print("Failed to prepare file for saving");
-        exit(EXIT_FAILURE);
-    }
-    return fp;
-}
-  

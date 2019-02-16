@@ -58,12 +58,14 @@
  * performs buffer clearning for the program. It is static as all i/o should
  * be implemented in this module.
  **/
+/*
 static void read_rest_of_line(void) {
         int ch;
         while (ch = getc(stdin), ch != '\n' && ch != EOF)
                 ;
         clearerr(stdin);
 }
+*/
 
 /**
  * implements the command interpreter for this application. It displays the
@@ -73,10 +75,10 @@ static void read_rest_of_line(void) {
 void repl(const struct command commands[], char filename[]) {
 
     struct line_list * lines;
-    
-    line = line_list_init();
+     
+    lines = line_list_init();
     load_file(filename, lines);
-    list_print(lines);
+    linelist_print(lines, stdout);
     save_file(filename, lines);
     list_free(lines);
 }
