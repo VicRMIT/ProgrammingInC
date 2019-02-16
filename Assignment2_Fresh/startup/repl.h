@@ -12,7 +12,11 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };
+enum input_result {
+        IR_FAILURE,
+        IR_SUCCESS,
+        IR_RTM
+};
 #ifndef REPL_H
 #define REPL_H
 void repl(const struct command[], char[]);

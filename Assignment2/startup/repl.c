@@ -8,7 +8,6 @@
  *****************************************************************************/
 
 #include "repl.h"
-#include "safemalloc.h"
 /**
  *
  * commands to be implemented for our repl:
@@ -74,15 +73,9 @@ static void read_rest_of_line(void) {
 void repl(const struct command commands[], char filename[]) {
 
     struct line_list * lines;
-    lines = safemalloc(sizeof(struct line_list)); 
-    line_list_init(lines);
-
-    if (filename==NULL) {
-        lines->head = NULL;
-        lines->num_lines = 0;
-    } else {
-        load_file(filename, lines);
-    }
+    
+    line = line_list_init();
+    load_file(filename, lines);
     list_print(lines);
     save_file(filename, lines);
     list_free(lines);

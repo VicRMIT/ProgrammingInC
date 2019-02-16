@@ -8,25 +8,53 @@
  *****************************************************************************/
 #include "repl.h"
 #include "line.h"
-#include "safemalloc.h"
+#include "helpers.h"
 /**
  * Functions for allocation, manipulation and freeing of the line_list go here
  **/
 
-void line_init(struct line * line) {
-    assert(line);
-    line->data = NULL;
-    line->lineno = 0;
-    line->len = 0;
-    memset(line,0,sizeof(struct line));
+struct line* line_init(const char text[], long lineno) {
+    struct line* theline;
+    theline = (struct line*)malloc(sizeof(struct line));
+    if(!theline){
+        perror("malloc failed");
+        return NULL;
+    }
+    theline->data = strdup(text);
+    if(!theline->data) {
+        line_free(theline);
+        return NULL;
+    }
+
+    theline->len = strlen(theline->data);
+    theline->lineno = lineno;
+    return theline;
 }
 
-void line_list_init(struct line_list * line_list) {
+struct line_node* line_node_init(struct line* theline) {
+    struct line_node* newNode;
+    newNode = (struct line_node*)malloc(sizeof(struct line_node));
+    if(!newNode) {
+        perror("malloc failed");
+        return NULL;
+    }
+    newNode->data=theline;
+    if(!newNode->data) {
+        return NULL;
+    }
+    newNode->next = NULL;
+    return newNode;
+}
 
-    assert(line_list);
-    line_list->head = NULL;
-    line_list->num_lines = 0;
-    memset(line_list,0,sizeof(struct line_list));
+struct line_list* line_list_init(void) {
+
+    struct line_list* newList;
+    newList= (struct line_list*)malloc(sizeof(struct line_list));
+    if(!newList) {
+        perror("malloc failed");
+        return NULL;
+    }
+
 
 }
 

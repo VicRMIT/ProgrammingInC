@@ -6,12 +6,13 @@
  * Startup code provided by Paul Miller for use in "Programming in C",
  * study period 4, 2018.
  *****************************************************************************/
+#include "helpers.h"
+#include "shared.h"
 #include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "shared.h"
 #ifndef LINE_H
 #define LINE_H
 struct line {
@@ -35,10 +36,15 @@ struct line_list {
  * function prototypes for allocating, manipulating and freeing the line_list
  * and its components go here.
  **/
-void line_init(struct line* line);
-void line_list_init(struct line_list * line_list);
-BOOLEAN addnode(struct line_list * line_list, char[], struct line * data);
-void list_print(struct line_list*);
-void list_free(struct line_list * line_list);
+struct line* line_init(const char[], long);
+struct line_list* line_list_init(void);
+struct line_node* line_node_init(struct line*);
+BOOLEAN list_insert(struct line_list*, const char[], long);
+BOOLEAN list_append(struct line_list*, const char[]);
+BOOLEAN line_print(const struct line*, FILE*);
+BOOLEAN linelist_print(const struct line_list*, FILE*);
+void list_free(struct line_list*);
+void node_free(struct line_node*);
+void line_free(struct line*);
 
 #endif

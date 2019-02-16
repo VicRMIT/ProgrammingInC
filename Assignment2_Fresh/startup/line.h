@@ -7,6 +7,7 @@
  * study period 4, 2018.
  *****************************************************************************/
 
+#include "helpers.h"
 #include "shared.h"
 #include <assert.h>
 #include <ctype.h>
@@ -32,8 +33,23 @@ struct line_list {
         long num_lines;
 };
 
-/**
- * function prototypes for allocating, manipulating and freeing the line_list
- * and its components go here.
- **/
+struct replace_pair {
+        const char* search;
+        const char* replace;
+};
+struct linelist_pair {
+        struct line_list* found;
+        struct line_list* replace;
+};
+
+struct line* line_make(const char[], long);
+struct line_node* linenode_make(struct line*);
+struct line_list* linelist_make(void);
+void line_free(struct line*);
+void linenode_free(struct line_node*);
+void linelist_free(struct line_list*);
+BOOLEAN linelist_insert(struct line_list*, const char[], long);
+BOOLEAN linelist_append(struct line_list*, const char*);
+BOOLEAN line_print(const struct line*, FILE*);
+BOOLEAN linelist_print(const struct line_list*, FILE*);
 #endif

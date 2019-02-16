@@ -13,10 +13,9 @@
  * loads the file specified from disk into a line_list.
  **/
 BOOLEAN load_file(const char fname[], struct line_list* thelist) {
-    FILE * input; 
-    char charline[LINELEN + EXTRACHARS];
+    char charline[BUFSIZ + EXTRACHARS];
     struct line newLine;
-    char * file_name;
+    FILE * input = fopen(fname, "r"); 
     file_name  = strdup(fname);
     line_init(&newLine); 
  /*   newLine = safemalloc(sizeof(struct line));*/

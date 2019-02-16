@@ -9,19 +9,15 @@
 
 #ifndef SHARED_H
 #define SHARED_H
-/**
- * definition of the boolean type for the application 
- **/
 typedef enum {
         FALSE,
         TRUE
 } BOOLEAN;
-
-/**
- * required for string handling. The length of a line and the extra characters
- * appended to a string successfully read by fgets.
- **/
 #define LINELEN 80
 #define EXTRACHARS 2
 
+struct result {
+        BOOLEAN success;
+        char error_string[LINELEN + 1];
+};
 #endif

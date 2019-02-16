@@ -14,13 +14,11 @@
  * convenience function to allocate a string and opy the data across to the new
  * memory.
  **/
-char* strdup(const char orig[])
-{
+char* strdup(const char orig[]) {
         /* allocate space for the string */
         char* copy = (char*)malloc(strlen(orig) + 1);
         /* check that it succeeded */
-        if (!copy)
-        {
+        if (!copy) {
                 perror("malloc failed");
                 return NULL;
         }
@@ -33,30 +31,24 @@ char* strdup(const char orig[])
  * inserts newline characters to wrap lines at less than the number of
  * characters specified.
  **/
-void fold(char line[], long width)
-{
+void fold(char line[], long width) {
         long len = strlen(line);
         long count = 0;
         long curcount = 0;
 
-        while (count < len)
-        {
+        while (count < len) {
                 ++count;
                 ++curcount;
-                if (count == len)
-                {
+                if (count == len) {
                         return;
                 }
-                if (line[count] == '\n')
-                {
+                if (line[count] == '\n') {
                         curcount = 0;
                 }
-                if (curcount == width)
-                {
+                if (curcount == width) {
                         /* subtract from the current string address until we get
                          * to a whitespace character */
-                        while (!isspace(line[count]))
-                        {
+                        while (!isspace(line[count])) {
                                 --count;
                         }
                         /* replace the whitespace character with a newline
@@ -72,18 +64,17 @@ void fold(char line[], long width)
 }
 
 /**
- * checks that a string only has spaces.
+ * tests whether the string passed in is solely made of whitespace
  **/
-BOOLEAN empty_string(const char string[])
-{
-        long count;
-        long len = strlen(string);
-        for (count = 0; count < len; ++count)
-        {
-                if (!isspace(string[count]))
-                {
+BOOLEAN empty_string(const char string[]) {
+        const char* iter = string;
+        /* iterate over the string and if there are any non-whitespace
+         * chars, return FALSE */
+        while (*iter) {
+                if (!isspace(*iter)) {
                         return FALSE;
                 }
+                ++iter;
         }
         return TRUE;
 }

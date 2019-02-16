@@ -37,27 +37,14 @@
  *   After printing out 25 matches, the user will be asked if they wish to
  *   continue and if they do, the next 25 lines that match will be printed.
  *
- * - replace (t): specified by the letter t followed by a slash followed by the
- *   search term followed by a slash followed by what to replace it with.
- *   The output in this case should be either a report stating no matches were
- *   found or a list of all matches found in the format of the original line
- *   then an arrow then the line after the replacements have been done. Please
- *   note that the replacement algorithm is a bonus requirement. You can get
- *   full marks without implementing this.
- *
  *   The prompt which must be used to indicate that the program is ready for
  *   input is the > character. Any errors should have clear output so the user
- *   knows what they need to do to correct it. If errors occur (the command in
- *   question returns FALSE), the prompt should be a question mark.
+ *   knows what they need to do to correct it.
  *
  *   All commands may have 0 or more spaces between the command and the
  *   argument. For
  **/
 
-/**
- * performs buffer clearning for the program. It is static as all i/o should
- * be implemented in this module.
- **/
 static void read_rest_of_line(void) {
         int ch;
         while (ch = getc(stdin), ch != '\n' && ch != EOF)
@@ -65,12 +52,21 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
-/**
- * implements the command interpreter for this application. It displays the
- * current prompt (based on whether the last action succeeded or not then
- * reads input then decides which command to invoke, then invokeds that command.
- **/
 void repl(const struct command commands[], char filename[]) {
+        struct line_list* thelist;
+        /* tell the compiler that the local definition of read_rest_of_line()
+         * won't be used */
+        (void)read_rest_of_line;
+        /* create the list */
+        thelist = linelist_make();
+        /* load the file into the list */
+        load_file(filename, thelist);
+        /* print the list */
+        linelist_print(thelist, stdout);
+        /* save the file back to disk */
+        save_file(filename, thelist);
+        /* free the list */
+        linelist_free(thelist);
 }
 
 /**

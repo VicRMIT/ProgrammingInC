@@ -12,9 +12,10 @@
 #include <stdlib.h>
 #ifndef MAIN_H
 #define MAIN_H
-/* place any any data structure definitions or function declarations for
- * this module here
- */
+
+enum { NOARGS = 1, FILEARGS, INVALID };
+
+#define FILEARG 1
 
 void print_usage(void);
 #endif /* MAIN_H */

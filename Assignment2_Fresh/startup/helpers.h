@@ -18,6 +18,6 @@
 #define DECIMAL 10
 
 void fold(char line[], long);
-char* strdup(const char[]);
 BOOLEAN empty_string(const char[]);
+char* strdup(const char[]);
 #endif

@@ -19,5 +19,5 @@
 
 BOOLEAN load_file(const char[], struct line_list*);
 BOOLEAN save_file(const char[], const struct line_list*);
-FILE* gwopen(const char* fname);
+
 #endif

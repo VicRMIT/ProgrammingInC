@@ -18,33 +18,29 @@
  * of the elements will get 0 marks. eg: you should use a loop or a mem*
  * function to do this initialisation.
  **/
-void commands_init(struct command commands[])
-{
-}
+void commands_init(struct command commands[]) {}
 
 /**
  * implements the "new file" command. You should just set the line list to be
  * an empty list
  **/
-BOOLEAN command_new(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_new(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
+
 /**
  * handles a request to load a file into the linked list. The actual work of
  * loading the file should be done in fileio module.
  **/
-BOOLEAN command_read(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_read(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
 /**
  * handles the saving of a file to disk. If no file is specified, the filename
- * that the file was specified under when loaded (if any) will be used.
+ * that the file was specified under (if any) will be used.
  **/
-BOOLEAN command_write(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_write(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
@@ -58,8 +54,7 @@ BOOLEAN command_write(const char remainder[], struct line_list* thelist)
  * 3: this is the third line of the file
  *
  **/
-BOOLEAN command_print(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_print(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
@@ -70,16 +65,14 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
  * count of lines in the file plus one (when the user chooses to append to the
  * end of the file).
  **/
-BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_insert(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
 /**
  * delete the lines at the line numbers specified in the remainder string.
  **/
-BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_delete(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
@@ -88,8 +81,7 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
  * output here should be as spcified in the assignment specification and help
  * documentation provided in the sample executable.
  **/
-BOOLEAN command_search(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_search(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
@@ -101,16 +93,14 @@ BOOLEAN command_search(const char remainder[], struct line_list* thelist)
  * with the replacement. Print out each replacement made. Please note that
  * you should do much / most of this work in functions you create yourself.
  **/
-BOOLEAN command_replace(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_replace(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
 /**
  * handles the quitting of the program and freeing any allocated memory
  **/
-BOOLEAN command_quit(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_quit(const char remainder[], struct line_list* thelist) {
         return FALSE;
 }
 
@@ -119,11 +109,9 @@ BOOLEAN command_quit(const char remainder[], struct line_list* thelist)
  * function as I don't want you to be spending time copying and pasting text as
  * there's little learning involved.
  **/
-BOOLEAN command_help(const char remainder[], struct line_list* thelist)
-{
+BOOLEAN command_help(const char remainder[], struct line_list* thelist) {
         (void)thelist;
-        if (empty_string(remainder))
-        {
+        if (empty_string(remainder)) {
                 char help_string[] =
                     "You have the following options: \n\n"
                     "n - make a new file, discarding any currently loaded "
@@ -140,38 +128,30 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                     "simply enter 'h' followed by the option.\n";
                 fold(help_string, LINELEN);
                 normal_print("%s\n", help_string);
-        }
-        else
-        {
+        } else {
                 char* output = NULL;
-                while (isspace(*remainder))
-                {
+                while (isspace(*remainder)) {
                         ++remainder;
                 }
                 /* if the remainder at this point is more than one char (a
                  * command, then it's an invalid help request */
-                if (strlen(remainder) > 1)
-                {
+                if (strlen(remainder) > 1) {
                         error_print(
                             "trailing invalid chars in request for help.\n");
                         return FALSE;
                 }
                 /* handle each kind of possible help request */
-                switch (tolower(*remainder))
-                {
+                switch (tolower(*remainder)) {
                         /* create a new file in memory */
-                        case CT_NEW:
-                        {
+                        case CT_NEW: {
                                 output = strdup(
                                     "n - no trailing argument. Creates a new "
                                     "empty file in memory. After doing this "
                                     "you can insert text on the first line. "
                                     "\n\n");
-                        }
-                        break;
+                        } break;
                         /* read a file in from disk */
-                        case CT_READ:
-                        {
+                        case CT_READ: {
                                 output = strdup(
                                     "r <path>, where path is the path to the "
                                     "file. Please note that no assumption is "
@@ -180,14 +160,12 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "into memory and folds the file so that "
                                     "the maximul line length is 80 "
                                     "characters.");
-                        }
-                        break;
+                        } break;
                         /* save the data in memory to a file on disk where the
                          * filename may be specified, if it is specified or
                          * should be taken from the file name that either it was
                          * loaded from or previously saved to */
-                        case CT_WRITE:
-                        {
+                        case CT_WRITE: {
                                 output = strdup(
                                     "w <path> where path is the path to the "
                                     "file. Please note that no assumption is "
@@ -197,12 +175,10 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "a file previously loaded into memory then "
                                     "the file name does not need to be "
                                     "provided.");
-                        }
-                        break;
+                        } break;
                         /* print out a range of lines or the whole file if it is
                          * not specified */
-                        case CT_PRINT:
-                        {
+                        case CT_PRINT: {
                                 output = strdup(
                                     "Prints out 1 or more lines of text. "
                                     "Can be invoked as: p on its own which "
@@ -218,10 +194,8 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "be printed out in the same format as "
                                     "specified for printing out a single "
                                     "line.\n\n");
-                        }
-                        break;
-                        case CT_INSERT:
-                        {
+                        } break;
+                        case CT_INSERT: {
                                 output = strdup(
                                     "Inserts one or more lines into the file. "
                                     "You specify the line where you want the "
@@ -237,10 +211,8 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "character mark, so if the line you enter "
                                     "is longer than 80 characters, it will "
                                     "become multiple lines in the list.\n\n");
-                        }
-                        break;
-                        case CT_DELETE:
-                        {
+                        } break;
+                        case CT_DELETE: {
                                 output = strdup(
                                     "Deletes one or more lines from the file "
                                     "loaded into memory. Obviously if there "
@@ -253,10 +225,8 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "list and the first number in the range "
                                     "must lower than or equal to the second "
                                     "number.\n\n");
-                        }
-                        break;
-                        case CT_SEARCH:
-                        {
+                        } break;
+                        case CT_SEARCH: {
                                 output = strdup(
                                     "searches for the text search in each line "
                                     "of the file. Any leading spaces before the"
@@ -265,29 +235,23 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                                     "the first word are considered part of the "
                                     "search because your search word might be "
                                     "multiword.\n\n");
-                        }
-                        break;
-                        case CT_HELP:
-                        {
+                        } break;
+                        case CT_HELP: {
                                 output = strdup(
                                     "displays help for each option that can be "
                                     "invoked. Type h followed by the letter "
                                     "for the option you want to get help on. "
                                     "Eg: hp would give you help on the print "
                                     "command.\n\n");
-                        }
-                        break;
-                        case CT_QUIT:
-                        {
+                        } break;
+                        case CT_QUIT: {
                                 output = strdup(
                                     "Quits the program. Simply type the q "
                                     "character or press [enter] or ctrl-d at "
                                     "the prompt");
-                        }
-                        break;
+                        } break;
                 }
-                if (output)
-                {
+                if (output) {
                         fold(output, LINELEN);
                         normal_print(output);
                         free(output);

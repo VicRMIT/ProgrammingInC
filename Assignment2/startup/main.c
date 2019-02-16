@@ -12,9 +12,11 @@ int main(int argc, char* argv[]) {
         
     struct command commands[NUM_COMMANDS];
 
+    commands_init(commands);
+
     if(argc > NUMARGS)
     {
-        fprintf(stderr, "Error: incorrect number of arguments passed in.\n");
+        error_print("Error: incorrect number of arguments passed in.\n");
         print_usage();
         return EXIT_FAILURE;
     }
@@ -23,7 +25,7 @@ int main(int argc, char* argv[]) {
         
     if (argv[INPUT] == NULL)
     {
-        repl(NULL,NULL);
+        repl(commands,NULL);
     } else {
         repl(commands, argv[INPUT]);
     }
