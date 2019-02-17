@@ -166,18 +166,22 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
         if(current->data->lineno == lines->start_line-1)
             pre_delete=current;
         if(((current->data->lineno >= lines->start_line) && 
-                    (lines->start_line != 0)) &&
-                ((current->data->lineno <= lines->finish_line) ||
-                 lines->finish_line == 0)) {
+                    (lines->start_line != 0) &&
+                (current->data->lineno <= lines->finish_line)) ||
+                ((current->data->lineno == lines->start_line) && 
+                (lines->finish_line == 0))) {
             linenode_free(current);
         }
-        if((current->data->lineno == lines->finish_line+1) &&
-               (lines->finish_line != 0)) {
+        if(((current->data->lineno == lines->finish_line+1) &&
+               (lines->finish_line != 0)) ||
+               ((current->data->lineno == lines->start_line+1) &&
+               (lines->finish_line == 0))) {
             pre_delete->next = current;
         }
         if((current->data->lineno>lines->start_line) &&
-                (current->data->lineno>lines->finish_line))
+                (current->data->lineno>lines->finish_line)) {
             current->data->lineno = current->data->lineno - removed_items;
+        }
         current=current->next;
     }
     free(lines);
