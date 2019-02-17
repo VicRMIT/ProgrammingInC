@@ -66,6 +66,11 @@ static void read_rest_of_line(void) {
         clearerr(stdin);
 }
 
+static void remove_newlines(char input[]) {
+   input[strcspn(input,"\n")] = 0; 
+}
+
+
 
 /**
  * implements the command interpreter for this application. It displays the
@@ -78,13 +83,9 @@ void repl(const struct command commands[], char filename[]) {
     char menuChoice[INPUTSIZE];
     lines = linelist_make();
     if(filename) {
-        if(!commands[IND_READ].func(filename, lines)) {
-            
-        } else {
-            normal_print("%s has been read in successfully\n", filename);
-        }
+        commands[IND_READ].func(filename, lines);
     }
-    normal_print("> ");
+    normal_print("\n> ");
 
     while (fgets(menuChoice, sizeof(menuChoice)+1, stdin) != NULL) {
         if (menuChoice[0] == '\n') {
@@ -94,105 +95,84 @@ void repl(const struct command commands[], char filename[]) {
                 normal_print("? ");
             }
         } else {
+            remove_newlines(menuChoice);
             switch(tolower(menuChoice[0])) {
                 case CT_NEW:
                     if(!commands[IND_NEW].func(NULL,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_READ:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_READ].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_WRITE:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_WRITE].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_PRINT:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_PRINT].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_INSERT:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_INSERT].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_DELETE:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_DELETE].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_SEARCH:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_SEARCH].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_REPLACE:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_REPLACE].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_HELP:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_HELP].func(menuChoice+1,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
                     break;
                 case CT_QUIT:
-                    if(!commands[IND_NEW].func(NULL,lines)){
+                    if(!commands[IND_QUIT].func(NULL,lines)){
                         normal_print("? ");
                     } else {
-                        normal_print("New document created");
                         normal_print("\n> ");
                     }
-                    read_rest_of_line();
-                    break;
+                    return;
                 default:
                     normal_print("? ");
-                    read_rest_of_line();
             } 
+            /*read_rest_of_line();*/
         }
-    }
- 
-    commands[IND_PRINT].func(NULL,lines);
+    } 
 }
 
 /**

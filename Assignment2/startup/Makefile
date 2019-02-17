@@ -14,6 +14,12 @@ TARGETS=picedit
 
 all: $(TARGETS)
 
+test.o: test.c
+	$(CC) $(CFLAGS) -c test.c
+
+test: test.o
+	$(CC) $(CFLAGS) test.o -o test
+
 command.o: command.c command.h line.h fileio.h
 	$(CC) $(CFLAGS) -c command.c
 

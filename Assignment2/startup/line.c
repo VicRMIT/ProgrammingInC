@@ -13,6 +13,30 @@
  * Functions for allocation, manipulation and freeing of the line_list go here
  **/
 
+struct line_args* line_args(const char args[]) {
+    int count;
+    struct line_args* activeLines;
+    char* tok;
+    char temp[INPUTSIZE];
+    strcpy(temp, args);
+    tok = strtok(temp,"-");
+    activeLines = (struct line_args*)malloc(sizeof(struct line_args));
+    activeLines->start_line = 0;
+    activeLines->finish_line = 0;
+    count = 0;
+    while(tok) {
+        if(count<2) {
+            if (count==0)
+                activeLines->start_line=strtol(tok,NULL,10);
+            else
+                activeLines->finish_line=strtol(tok,NULL,10);
+        }
+        count++;
+        tok = strtok(NULL,"-");
+    }
+    return activeLines;
+}
+
 struct line* line_make(const char text[], long lineno) {
     struct line* theline;
     theline = (struct line*)malloc(sizeof(struct line));
@@ -133,6 +157,7 @@ BOOLEAN line_print(const struct line* theLine, FILE* out) {
     } else {
         if (fprintf(out, "%s\n", theLine->data) < 0) {
             error_print("%s\n", strerror(ferror(out)));
+            return FALSE;
         }
     }
     return TRUE;

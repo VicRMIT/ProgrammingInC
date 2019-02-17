@@ -19,7 +19,6 @@ BOOLEAN load_file(const char fname[], struct line_list* thelist) {
         
     if(!input)
     {
-        error_print("Failed to open file\n");
         return FALSE;
     }
 

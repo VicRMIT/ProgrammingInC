@@ -46,16 +46,30 @@ BOOLEAN command_new(const char remainder[], struct line_list* thelist)
         linelist_free(thelist);
     }
     thelist = linelist_make();
-    return TRUE;
+    if(thelist) {
+        normal_print("New document started.");
+        return TRUE;
+    }
+    normal_print("Could not create new doc.");
+    return FALSE;
 }
 /**
  * handles a request to load a file into the linked list. The actual work of
  * loading the file should be done in fileio module.
  **/
 BOOLEAN command_read(const char remainder[], struct line_list* thelist)
-{
-    load_file(remainder, thelist);
-    return TRUE;
+{   
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    if(load_file(remainder, thelist)) {
+        normal_print("File loaded.");
+        return TRUE;
+    } else {
+        error_print("Failed to load file");
+        return FALSE;
+    }
 }
 
 /**
@@ -64,7 +78,13 @@ BOOLEAN command_read(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_write(const char remainder[], struct line_list* thelist)
 {
-    save_file(remainder, thelist);
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    if(save_file(remainder, thelist)) {
+        return TRUE;
+    }
     return FALSE;
 }
 
@@ -80,8 +100,27 @@ BOOLEAN command_write(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_print(const char remainder[], struct line_list* thelist)
 {
-    linelist_print(thelist, stdout);
-    return FALSE;
+    struct line_node *current = thelist->head;
+    struct line_args* lines;
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    lines = line_args(remainder);
+    while(current!=NULL)
+    {
+        if((current->data->lineno >= lines->start_line) && 
+                ((current->data->lineno <= lines->finish_line) ||
+                 lines->finish_line == 0)) {
+            if (!line_print(current->data, stdout)) {
+                free(lines);
+                return FALSE;
+            }
+        }
+        current=current->next;
+    }
+    free(lines);
+    return TRUE;
 }
 
 /**
@@ -101,7 +140,48 @@ BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    long removed_items;
+    struct line_node *current = thelist->head;
+    struct line_node *pre_delete;
+    struct line_args* lines;
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    lines = line_args(remainder);
+    
+    removed_items = lines->finish_line - lines->start_line;
+    if(removed_items < 0)
+        if (lines->finish_line != 0)
+            return FALSE;
+        else
+            removed_items = 1;
+    else if ((removed_items == 0) && lines->start_line!=0)
+        removed_items = 1;
+    else if (removed_items>0)
+        removed_items++;
+    
+    while(current!=NULL)
+    {   
+        if(current->data->lineno == lines->start_line-1)
+            pre_delete=current;
+        if(((current->data->lineno >= lines->start_line) && 
+                    (lines->start_line != 0)) &&
+                ((current->data->lineno <= lines->finish_line) ||
+                 lines->finish_line == 0)) {
+            linenode_free(current);
+        }
+        if((current->data->lineno == lines->finish_line+1) &&
+               (lines->finish_line != 0)) {
+            pre_delete->next = current;
+        }
+        if((current->data->lineno>lines->start_line) &&
+                (current->data->lineno>lines->finish_line))
+            current->data->lineno = current->data->lineno - removed_items;
+        current=current->next;
+    }
+    free(lines);
+    return TRUE;
 }
 
 /**
@@ -111,7 +191,21 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_search(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    struct line_node *current = thelist->head;
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    while(current!=NULL)
+    {
+        if(strstr(current->data->data,remainder)!=NULL) {
+            if (!line_print(current->data, stdout)) {
+                return FALSE;
+            }
+        }
+        current=current->next;
+    }
+    return TRUE;
 }
 
 /**
@@ -172,7 +266,7 @@ BOOLEAN command_help(const char remainder[], struct line_list* thelist)
                 }
                 /* if the remainder at this point is more than one char (a
                  * command, then it's an invalid help request */
-                if (strlen(remainder) > 1)
+                if (strlen(remainder) > 2)
                 {
                         error_print(
                             "trailing invalid chars in request for help.\n");
