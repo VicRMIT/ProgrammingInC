@@ -15,6 +15,7 @@
 enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };
 #ifndef REPL_H
 #define REPL_H
+#define INPUTSIZE 500
 void repl(const struct command[], char[]);
 int normal_print(const char[], ...);
 int error_print(const char[], ...);

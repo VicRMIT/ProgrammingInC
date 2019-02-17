@@ -32,6 +32,16 @@ struct line_list {
         long num_lines;
 };
 
+struct replace_pair {
+    const char* search;
+    const char* replace;
+};
+
+struct linelist_pair {
+    struct line_list* found;
+    struct line_list* replace;
+};
+
 /**
  * function prototypes for allocating, manipulating and freeing the line_list
  * and its components go here.

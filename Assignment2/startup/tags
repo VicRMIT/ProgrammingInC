@@ -1,0 +1,210 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOOLEAN	backup/shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon2
+BOOLEAN	shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon1
+CC	Makefile	/^CC=gcc$/;"	m
+CC	backup/Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-ansi -Wall -pedantic -g$/;"	m
+CFLAGS	backup/Makefile	/^CFLAGS=-ansi -Wall -pedantic -g$/;"	m
+COMMAND_H	backup/command.h	17;"	d
+COMMAND_H	command.h	17;"	d
+CT_DELETE	backup/command.h	/^        CT_DELETE = 'd',$/;"	e	enum:command_type
+CT_DELETE	command.h	/^        CT_DELETE = 'd',$/;"	e	enum:command_type
+CT_HELP	backup/command.h	/^        CT_HELP = 'h',$/;"	e	enum:command_type
+CT_HELP	command.h	/^        CT_HELP = 'h',$/;"	e	enum:command_type
+CT_INSERT	backup/command.h	/^        CT_INSERT = 'i',$/;"	e	enum:command_type
+CT_INSERT	command.h	/^        CT_INSERT = 'i',$/;"	e	enum:command_type
+CT_NEW	backup/command.h	/^        CT_NEW = 'n',$/;"	e	enum:command_type
+CT_NEW	command.h	/^        CT_NEW = 'n',$/;"	e	enum:command_type
+CT_PRINT	backup/command.h	/^        CT_PRINT = 'p',$/;"	e	enum:command_type
+CT_PRINT	command.h	/^        CT_PRINT = 'p',$/;"	e	enum:command_type
+CT_QUIT	backup/command.h	/^        CT_QUIT = 'q'$/;"	e	enum:command_type
+CT_QUIT	command.h	/^        CT_QUIT = 'q'$/;"	e	enum:command_type
+CT_READ	backup/command.h	/^        CT_READ = 'r',$/;"	e	enum:command_type
+CT_READ	command.h	/^        CT_READ = 'r',$/;"	e	enum:command_type
+CT_REPLACE	backup/command.h	/^        CT_REPLACE = 't',$/;"	e	enum:command_type
+CT_REPLACE	command.h	/^        CT_REPLACE = 't',$/;"	e	enum:command_type
+CT_SEARCH	backup/command.h	/^        CT_SEARCH = 's',$/;"	e	enum:command_type
+CT_SEARCH	command.h	/^        CT_SEARCH = 's',$/;"	e	enum:command_type
+CT_WRITE	backup/command.h	/^        CT_WRITE = 'w',$/;"	e	enum:command_type
+CT_WRITE	command.h	/^        CT_WRITE = 'w',$/;"	e	enum:command_type
+DECIMAL	backup/helpers.h	18;"	d
+DECIMAL	helpers.h	18;"	d
+EXTRACHARS	backup/shared.h	25;"	d
+EXTRACHARS	shared.h	25;"	d
+FALSE	backup/shared.h	/^        FALSE,$/;"	e	enum:__anon2
+FALSE	shared.h	/^        FALSE,$/;"	e	enum:__anon1
+FILEIO_H	backup/fileio.h	18;"	d
+FILEIO_H	fileio.h	18;"	d
+HELPERS_H	backup/helpers.h	16;"	d
+HELPERS_H	helpers.h	16;"	d
+IND_DELETE	backup/command.h	/^        IND_DELETE,$/;"	e	enum:command_index
+IND_DELETE	command.h	/^        IND_DELETE,$/;"	e	enum:command_index
+IND_HELP	backup/command.h	/^        IND_HELP,$/;"	e	enum:command_index
+IND_HELP	command.h	/^        IND_HELP,$/;"	e	enum:command_index
+IND_INSERT	backup/command.h	/^        IND_INSERT,$/;"	e	enum:command_index
+IND_INSERT	command.h	/^        IND_INSERT,$/;"	e	enum:command_index
+IND_NEW	backup/command.h	/^        IND_NEW,$/;"	e	enum:command_index
+IND_NEW	command.h	/^        IND_NEW,$/;"	e	enum:command_index
+IND_PRINT	backup/command.h	/^        IND_PRINT,$/;"	e	enum:command_index
+IND_PRINT	command.h	/^        IND_PRINT,$/;"	e	enum:command_index
+IND_QUIT	backup/command.h	/^        IND_QUIT$/;"	e	enum:command_index
+IND_QUIT	command.h	/^        IND_QUIT$/;"	e	enum:command_index
+IND_READ	backup/command.h	/^        IND_READ,$/;"	e	enum:command_index
+IND_READ	command.h	/^        IND_READ,$/;"	e	enum:command_index
+IND_REPLACE	backup/command.h	/^        IND_REPLACE,$/;"	e	enum:command_index
+IND_REPLACE	command.h	/^        IND_REPLACE,$/;"	e	enum:command_index
+IND_SEARCH	backup/command.h	/^        IND_SEARCH,$/;"	e	enum:command_index
+IND_SEARCH	command.h	/^        IND_SEARCH,$/;"	e	enum:command_index
+IND_WRITE	backup/command.h	/^        IND_WRITE,$/;"	e	enum:command_index
+IND_WRITE	command.h	/^        IND_WRITE,$/;"	e	enum:command_index
+INPUT	backup/main.h	/^    PREPEND, INPUT$/;"	e	enum:arg_position
+INPUT	main.h	/^    PREPEND, INPUT$/;"	e	enum:arg_position
+INPUTSIZE	repl.h	18;"	d
+IR_FAILURE	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_FAILURE	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_RTM	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_RTM	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_SUCCESS	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+IR_SUCCESS	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
+LFLAGS	Makefile	/^LFLAGS=$/;"	m
+LFLAGS	backup/Makefile	/^LFLAGS=$/;"	m
+LINELEN	backup/shared.h	24;"	d
+LINELEN	shared.h	24;"	d
+LINE_H	backup/line.h	17;"	d
+LINE_H	line.h	17;"	d
+MAIN_H	backup/main.h	14;"	d
+MAIN_H	main.h	14;"	d
+NUMARGS	backup/main.h	21;"	d
+NUMARGS	main.h	21;"	d
+NUM_COMMANDS	backup/command.h	50;"	d
+NUM_COMMANDS	command.h	50;"	d
+PREPEND	backup/main.h	/^    PREPEND, INPUT$/;"	e	enum:arg_position
+PREPEND	main.h	/^    PREPEND, INPUT$/;"	e	enum:arg_position
+REPL_H	backup/repl.h	17;"	d
+REPL_H	repl.h	17;"	d
+SHARED_H	backup/shared.h	11;"	d
+SHARED_H	shared.h	11;"	d
+TARGETS	Makefile	/^TARGETS=picedit$/;"	m
+TARGETS	backup/Makefile	/^TARGETS=picedit$/;"	m
+TRUE	backup/shared.h	/^        TRUE$/;"	e	enum:__anon2
+TRUE	shared.h	/^        TRUE$/;"	e	enum:__anon1
+arg_position	backup/main.h	/^enum arg_position$/;"	g
+arg_position	main.h	/^enum arg_position$/;"	g
+command	backup/command.h	/^struct command {$/;"	s
+command	command.h	/^struct command {$/;"	s
+command_delete	backup/command.c	/^BOOLEAN command_delete(const char remainder[], struct line_list* thelist)$/;"	f
+command_delete	command.c	/^BOOLEAN command_delete(const char remainder[], struct line_list* thelist)$/;"	f
+command_func	backup/command.h	/^typedef BOOLEAN (*command_func)(const char[], struct line_list*);$/;"	t
+command_func	command.h	/^typedef BOOLEAN (*command_func)(const char[], struct line_list*);$/;"	t
+command_help	backup/command.c	/^BOOLEAN command_help(const char remainder[], struct line_list* thelist)$/;"	f
+command_help	command.c	/^BOOLEAN command_help(const char remainder[], struct line_list* thelist)$/;"	f
+command_index	backup/command.h	/^enum command_index {$/;"	g
+command_index	command.h	/^enum command_index {$/;"	g
+command_insert	backup/command.c	/^BOOLEAN command_insert(const char remainder[], struct line_list* thelist)$/;"	f
+command_insert	command.c	/^BOOLEAN command_insert(const char remainder[], struct line_list* thelist)$/;"	f
+command_new	backup/command.c	/^BOOLEAN command_new(const char remainder[], struct line_list* thelist)$/;"	f
+command_new	command.c	/^BOOLEAN command_new(const char remainder[], struct line_list* thelist)$/;"	f
+command_print	backup/command.c	/^BOOLEAN command_print(const char remainder[], struct line_list* thelist)$/;"	f
+command_print	command.c	/^BOOLEAN command_print(const char remainder[], struct line_list* thelist)$/;"	f
+command_quit	backup/command.c	/^BOOLEAN command_quit(const char remainder[], struct line_list* thelist)$/;"	f
+command_quit	command.c	/^BOOLEAN command_quit(const char remainder[], struct line_list* thelist)$/;"	f
+command_read	backup/command.c	/^BOOLEAN command_read(const char remainder[], struct line_list* thelist)$/;"	f
+command_read	command.c	/^BOOLEAN command_read(const char remainder[], struct line_list* thelist)$/;"	f
+command_replace	backup/command.c	/^BOOLEAN command_replace(const char remainder[], struct line_list* thelist)$/;"	f
+command_replace	command.c	/^BOOLEAN command_replace(const char remainder[], struct line_list* thelist)$/;"	f
+command_search	backup/command.c	/^BOOLEAN command_search(const char remainder[], struct line_list* thelist)$/;"	f
+command_search	command.c	/^BOOLEAN command_search(const char remainder[], struct line_list* thelist)$/;"	f
+command_type	backup/command.h	/^enum command_type {$/;"	g
+command_type	command.h	/^enum command_type {$/;"	g
+command_write	backup/command.c	/^BOOLEAN command_write(const char remainder[], struct line_list* thelist)$/;"	f
+command_write	command.c	/^BOOLEAN command_write(const char remainder[], struct line_list* thelist)$/;"	f
+commands_init	backup/command.c	/^void commands_init(struct command commands[])$/;"	f
+commands_init	command.c	/^void commands_init(struct command commands[])$/;"	f
+data	backup/line.h	/^        char* data;$/;"	m	struct:line
+data	backup/line.h	/^        struct line* data;$/;"	m	struct:line_node	typeref:struct:line_node::line
+data	line.h	/^        char* data;$/;"	m	struct:line
+data	line.h	/^        struct line* data;$/;"	m	struct:line_node	typeref:struct:line_node::line
+empty_string	backup/helpers.c	/^BOOLEAN empty_string(const char string[])$/;"	f
+empty_string	helpers.c	/^BOOLEAN empty_string(const char string[])$/;"	f
+error_print	backup/repl.c	/^int error_print(const char format[], ...) {$/;"	f
+error_print	repl.c	/^int error_print(const char format[], ...) {$/;"	f
+error_string	backup/shared.h	/^    char error_string[LINELEN+1];$/;"	m	struct:result
+error_string	shared.h	/^    char error_string[LINELEN+1];$/;"	m	struct:result
+file_name	backup/line.h	/^        char* file_name;$/;"	m	struct:line_list
+file_name	line.h	/^        char* file_name;$/;"	m	struct:line_list
+fold	backup/helpers.c	/^void fold(char line[], long width)$/;"	f
+fold	helpers.c	/^void fold(char line[], long width)$/;"	f
+found	line.h	/^    struct line_list* found;$/;"	m	struct:linelist_pair	typeref:struct:linelist_pair::line_list
+func	backup/command.h	/^        command_func func;$/;"	m	struct:command
+func	command.h	/^        command_func func;$/;"	m	struct:command
+head	backup/line.h	/^        struct line_node* head;$/;"	m	struct:line_list	typeref:struct:line_list::line_node
+head	line.h	/^        struct line_node* head;$/;"	m	struct:line_list	typeref:struct:line_list::line_node
+input_result	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	g
+input_result	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	g
+len	backup/line.h	/^        long len;$/;"	m	struct:line
+len	line.h	/^        long len;$/;"	m	struct:line
+line	backup/line.h	/^struct line {$/;"	s
+line	line.h	/^struct line {$/;"	s
+line_free	backup/line.c	/^void line_free(struct line* aLine) {$/;"	f
+line_free	line.c	/^void line_free(struct line* aLine) {$/;"	f
+line_list	backup/line.h	/^struct line_list {$/;"	s
+line_list	line.h	/^struct line_list {$/;"	s
+line_make	backup/line.c	/^struct line* line_make(const char text[], long lineno) {$/;"	f
+line_make	line.c	/^struct line* line_make(const char text[], long lineno) {$/;"	f
+line_node	backup/line.h	/^struct line_node {$/;"	s
+line_node	line.h	/^struct line_node {$/;"	s
+line_print	backup/line.c	/^BOOLEAN line_print(const struct line* theLine, FILE* out) {$/;"	f
+line_print	line.c	/^BOOLEAN line_print(const struct line* theLine, FILE* out) {$/;"	f
+linelist_append	backup/line.c	/^BOOLEAN linelist_append(struct line_list* theList, const char theLine[]) {$/;"	f
+linelist_append	line.c	/^BOOLEAN linelist_append(struct line_list* theList, const char theLine[]) {$/;"	f
+linelist_free	backup/line.c	/^void linelist_free(struct line_list * aList)$/;"	f
+linelist_free	line.c	/^void linelist_free(struct line_list * aList)$/;"	f
+linelist_insert	backup/line.c	/^BOOLEAN linelist_insert(struct line_list* thelist,const char text[], long index)$/;"	f
+linelist_insert	line.c	/^BOOLEAN linelist_insert(struct line_list* thelist,const char text[], long index)$/;"	f
+linelist_make	backup/line.c	/^struct line_list* linelist_make(void) {$/;"	f
+linelist_make	line.c	/^struct line_list* linelist_make(void) {$/;"	f
+linelist_pair	line.h	/^struct linelist_pair {$/;"	s
+linelist_print	backup/line.c	/^BOOLEAN linelist_print(const struct line_list* theList, FILE* out)$/;"	f
+linelist_print	line.c	/^BOOLEAN linelist_print(const struct line_list* theList, FILE* out)$/;"	f
+lineno	backup/line.h	/^        long lineno;$/;"	m	struct:line
+lineno	line.h	/^        long lineno;$/;"	m	struct:line
+linenode_free	backup/line.c	/^void linenode_free(struct line_node* node)$/;"	f
+linenode_free	line.c	/^void linenode_free(struct line_node* node)$/;"	f
+linenode_make	backup/line.c	/^struct line_node* linenode_make(struct line* theline) {$/;"	f
+linenode_make	line.c	/^struct line_node* linenode_make(struct line* theline) {$/;"	f
+load_file	backup/fileio.c	/^BOOLEAN load_file(const char fname[], struct line_list* thelist) {$/;"	f
+load_file	fileio.c	/^BOOLEAN load_file(const char fname[], struct line_list* thelist) {$/;"	f
+main	backup/main.c	/^int main(int argc, char* argv[]) {$/;"	f
+main	examples/fred.c	/^int main(void)$/;"	f
+main	main.c	/^int main(int argc, char* argv[]) {$/;"	f
+next	backup/line.h	/^        struct line_node* next;$/;"	m	struct:line_node	typeref:struct:line_node::line_node
+next	line.h	/^        struct line_node* next;$/;"	m	struct:line_node	typeref:struct:line_node::line_node
+normal_print	backup/repl.c	/^int normal_print(const char format[], ...) {$/;"	f
+normal_print	repl.c	/^int normal_print(const char format[], ...) {$/;"	f
+num_lines	backup/line.h	/^        long num_lines;$/;"	m	struct:line_list
+num_lines	line.h	/^        long num_lines;$/;"	m	struct:line_list
+print_usage	backup/main.c	/^void print_usage(void) {$/;"	f
+print_usage	main.c	/^void print_usage(void) {$/;"	f
+read_rest_of_line	repl.c	/^static void read_rest_of_line(void) {$/;"	f	file:
+repl	backup/repl.c	/^void repl(const struct command commands[], char filename[]) {$/;"	f
+repl	repl.c	/^void repl(const struct command commands[], char filename[]) {$/;"	f
+replace	line.h	/^    const char* replace;$/;"	m	struct:replace_pair
+replace	line.h	/^    struct line_list* replace;$/;"	m	struct:linelist_pair	typeref:struct:linelist_pair::line_list
+replace_pair	line.h	/^struct replace_pair {$/;"	s
+result	backup/shared.h	/^struct result {$/;"	s
+result	shared.h	/^struct result {$/;"	s
+save_file	backup/fileio.c	/^BOOLEAN save_file(const char fname[], const struct line_list* thelist) {$/;"	f
+save_file	fileio.c	/^BOOLEAN save_file(const char fname[], const struct line_list* thelist) {$/;"	f
+search	line.h	/^    const char* search;$/;"	m	struct:replace_pair
+strdup	backup/helpers.c	/^char* strdup(const char orig[])$/;"	f
+strdup	helpers.c	/^char* strdup(const char orig[])$/;"	f
+strlen	examples/strlen.c	/^size_t strlen(const char string[])$/;"	f
+succes	backup/shared.h	/^    BOOLEAN succes;$/;"	m	struct:result
+succes	shared.h	/^    BOOLEAN succes;$/;"	m	struct:result
+type	backup/command.h	/^        enum command_type type;$/;"	m	struct:command	typeref:enum:command::command_type
+type	command.h	/^        enum command_type type;$/;"	m	struct:command	typeref:enum:command::command_type

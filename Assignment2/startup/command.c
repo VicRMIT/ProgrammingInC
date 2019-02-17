@@ -20,6 +20,20 @@
  **/
 void commands_init(struct command commands[])
 {
+    BOOLEAN (*func[NUM_COMMANDS])(const char[], struct line_list*) = {
+        command_new, command_read, command_write, command_print, command_insert,
+        command_delete, command_search, command_replace, command_help,
+        command_quit
+    };
+
+    const enum command_type types[] = {CT_NEW, CT_READ, CT_WRITE, CT_PRINT,
+       CT_INSERT, CT_DELETE, CT_SEARCH, CT_REPLACE, CT_HELP, CT_QUIT}; 
+    
+    int iter;
+    for(iter=0; iter<NUM_COMMANDS;iter++) {
+        commands[iter].type = types[iter];
+        commands[iter].func = func[iter];
+    }
 }
 
 /**
@@ -28,7 +42,11 @@ void commands_init(struct command commands[])
  **/
 BOOLEAN command_new(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    if (thelist) {
+        linelist_free(thelist);
+    }
+    thelist = linelist_make();
+    return TRUE;
 }
 /**
  * handles a request to load a file into the linked list. The actual work of
@@ -36,7 +54,8 @@ BOOLEAN command_new(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_read(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    load_file(remainder, thelist);
+    return TRUE;
 }
 
 /**
@@ -45,7 +64,8 @@ BOOLEAN command_read(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_write(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    save_file(remainder, thelist);
+    return FALSE;
 }
 
 /**
@@ -60,7 +80,8 @@ BOOLEAN command_write(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_print(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    linelist_print(thelist, stdout);
+    return FALSE;
 }
 
 /**
@@ -111,7 +132,8 @@ BOOLEAN command_replace(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_quit(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    linelist_free(thelist);
+    return TRUE;
 }
 
 /**

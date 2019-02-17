@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
         /* implement behaviour based on the number of arguments passed in */
         /* if there are invalid arguments, display appropriate
          * error messages and exit */
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }
 
 /**
