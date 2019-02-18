@@ -132,7 +132,32 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
 {
-        return FALSE;
+    long inserted_items;
+    struct line_args* lines;
+    while (isspace(*remainder))
+    {
+        ++remainder;
+    }
+    lines = line_args(remainder);
+    
+    inserted_items = lines->finish_line - lines->start_line;
+    if(inserted_items < 0)
+        if (lines->finish_line != 0)
+            return FALSE;
+        else
+            inserted_items = 1;
+    else if ((inserted_items == 0) && lines->start_line!=0)
+        inserted_items = 1;
+    else if (inserted_items>0)
+        inserted_items++;
+    
+    if (lines->start_line!=0) {
+       if(!linelist_insert(thelist, remainder, lines->start_line))
+          return FALSE;
+        else
+           return TRUE; 
+    }
+    return FALSE;
 }
 
 /**
@@ -142,7 +167,7 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
 {
     long removed_items;
     struct line_node *current = thelist->head;
-    struct line_node *pre_delete;
+    struct line_node *pre_delete = NULL, *next, *delete;
     struct line_args* lines;
     while (isspace(*remainder))
     {
@@ -162,29 +187,35 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
         removed_items++;
     
     while(current!=NULL)
-    {   
-        if(current->data->lineno == lines->start_line-1)
+    {  
+        next = current->next; 
+        if(current->data->lineno == lines->start_line-1){
             pre_delete=current;
-        if(((current->data->lineno >= lines->start_line) && 
+        }
+        else if(((current->data->lineno >= lines->start_line) && 
                     (lines->start_line != 0) &&
                 (current->data->lineno <= lines->finish_line)) ||
                 ((current->data->lineno == lines->start_line) && 
                 (lines->finish_line == 0))) {
-            linenode_free(current);
+            delete = current;
+            linenode_free(delete);
         }
-        if(((current->data->lineno == lines->finish_line+1) &&
-               (lines->finish_line != 0)) ||
-               ((current->data->lineno == lines->start_line+1) &&
-               (lines->finish_line == 0))) {
-            pre_delete->next = current;
+        else {
+            if(((current->data->lineno == lines->finish_line+1) &&
+                   (lines->finish_line != 0)) ||
+                   ((current->data->lineno == lines->start_line+1) &&
+                   (lines->finish_line == 0))) {
+                pre_delete->next = current;
+            }
+            if((current->data->lineno>lines->start_line) &&
+                    (current->data->lineno>lines->finish_line)) {
+                current->data->lineno = current->data->lineno - removed_items;
+            }
         }
-        if((current->data->lineno>lines->start_line) &&
-                (current->data->lineno>lines->finish_line)) {
-            current->data->lineno = current->data->lineno - removed_items;
-        }
-        current=current->next;
+        current = next;
     }
     free(lines);
+    thelist->num_lines = thelist->num_lines - removed_items;
     return TRUE;
 }
 
