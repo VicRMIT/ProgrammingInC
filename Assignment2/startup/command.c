@@ -121,6 +121,11 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
                 free(lines);
                 return FALSE;
             }
+        } else if ((lines->start_line==0) && (lines->finish_line==0)) {
+            if (!line_print(current->data, stdout)) {
+                free(lines);
+                return FALSE;
+            }
         }
         current=current->next;
     }
@@ -162,6 +167,7 @@ BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
     else if (inserted_items>0)
         inserted_items++;
    
+    normal_print("\n%d: %s", lines->start_line, remainder);
     while(fgets(input,sizeof(lines)+1,stdin) != NULL) {
         if(input[0]=='\n') {
             break;
