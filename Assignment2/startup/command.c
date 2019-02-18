@@ -10,6 +10,7 @@
 #include "command.h"
 #include "helpers.h"
 #include "repl.h"
+#include <math.h>
 /**
  * copy into the commands array the structures to represeent each function to be
  * called by the system. The command_index enum defines the order of the command
@@ -132,14 +133,19 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
 {
+    int rangeLength;
     long inserted_items;
     struct line_args* lines;
+    int iter = 0;
     while (isspace(*remainder))
     {
         ++remainder;
     }
     lines = line_args(remainder);
-    
+    rangeLength = floor(log10(abs(lines->start_line)))+1;
+    for(; iter<rangeLength;iter++) {
+        ++remainder;
+    }    
     inserted_items = lines->finish_line - lines->start_line;
     if(inserted_items < 0)
         if (lines->finish_line != 0)
@@ -206,6 +212,8 @@ BOOLEAN command_delete(const char remainder[], struct line_list* thelist)
                    ((current->data->lineno == lines->start_line+1) &&
                    (lines->finish_line == 0))) {
                 pre_delete->next = current;
+                if (lines->start_line == 1) 
+                    thelist->head = current;
             }
             if((current->data->lineno>lines->start_line) &&
                     (current->data->lineno>lines->finish_line)) {
