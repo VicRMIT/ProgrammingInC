@@ -111,8 +111,12 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
     while(current!=NULL)
     {
         if((current->data->lineno >= lines->start_line) && 
-                ((current->data->lineno <= lines->finish_line) ||
-                 lines->finish_line == 0)) {
+                (current->data->lineno <= lines->finish_line)) {
+            if (!line_print(current->data, stdout)) {
+                free(lines);
+                return FALSE;
+            }
+        } else if (current->data->lineno == lines->start_line) {
             if (!line_print(current->data, stdout)) {
                 free(lines);
                 return FALSE;
@@ -133,6 +137,7 @@ BOOLEAN command_print(const char remainder[], struct line_list* thelist)
  **/
 BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
 {
+    char input[INPUTSIZE];
     int rangeLength;
     long inserted_items;
     struct line_args* lines;
@@ -156,7 +161,15 @@ BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
         inserted_items = 1;
     else if (inserted_items>0)
         inserted_items++;
-    
+   
+    while(fgets(input,sizeof(lines)+1,stdin) != NULL) {
+        if(input[0]=='\n') {
+            break;
+        } else {
+
+        }
+    }
+
     if (lines->start_line!=0) {
        if(!linelist_insert(thelist, remainder, lines->start_line))
           return FALSE;
