@@ -4,8 +4,8 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-BOOLEAN	backup/shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon2
-BOOLEAN	shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon1
+BOOLEAN	backup/shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon1
+BOOLEAN	shared.h	/^} BOOLEAN;$/;"	t	typeref:enum:__anon2
 CC	Makefile	/^CC=gcc$/;"	m
 CC	backup/Makefile	/^CC=gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS=-ansi -Wall -pedantic -g$/;"	m
@@ -36,8 +36,8 @@ DECIMAL	backup/helpers.h	18;"	d
 DECIMAL	helpers.h	18;"	d
 EXTRACHARS	backup/shared.h	25;"	d
 EXTRACHARS	shared.h	25;"	d
-FALSE	backup/shared.h	/^        FALSE,$/;"	e	enum:__anon2
-FALSE	shared.h	/^        FALSE,$/;"	e	enum:__anon1
+FALSE	backup/shared.h	/^        FALSE,$/;"	e	enum:__anon1
+FALSE	shared.h	/^        FALSE,$/;"	e	enum:__anon2
 FILEIO_H	backup/fileio.h	18;"	d
 FILEIO_H	fileio.h	18;"	d
 HELPERS_H	backup/helpers.h	16;"	d
@@ -71,7 +71,7 @@ IR_RTM	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"
 IR_RTM	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
 IR_SUCCESS	backup/repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
 IR_SUCCESS	repl.h	/^enum input_result { IR_FAILURE, IR_SUCCESS, IR_RTM };$/;"	e	enum:input_result
-LFLAGS	Makefile	/^LFLAGS=$/;"	m
+LFLAGS	Makefile	/^LFLAGS=-lm$/;"	m
 LFLAGS	backup/Makefile	/^LFLAGS=$/;"	m
 LINELEN	backup/shared.h	24;"	d
 LINELEN	shared.h	24;"	d
@@ -91,8 +91,8 @@ SHARED_H	backup/shared.h	11;"	d
 SHARED_H	shared.h	11;"	d
 TARGETS	Makefile	/^TARGETS=picedit$/;"	m
 TARGETS	backup/Makefile	/^TARGETS=picedit$/;"	m
-TRUE	backup/shared.h	/^        TRUE$/;"	e	enum:__anon2
-TRUE	shared.h	/^        TRUE$/;"	e	enum:__anon1
+TRUE	backup/shared.h	/^        TRUE$/;"	e	enum:__anon1
+TRUE	shared.h	/^        TRUE$/;"	e	enum:__anon2
 arg_position	backup/main.h	/^enum arg_position$/;"	g
 arg_position	main.h	/^enum arg_position$/;"	g
 command	backup/command.h	/^struct command {$/;"	s
@@ -137,6 +137,8 @@ error_string	backup/shared.h	/^    char error_string[LINELEN+1];$/;"	m	struct:re
 error_string	shared.h	/^    char error_string[LINELEN+1];$/;"	m	struct:result
 file_name	backup/line.h	/^        char* file_name;$/;"	m	struct:line_list
 file_name	line.h	/^        char* file_name;$/;"	m	struct:line_list
+finish_line	line.h	/^    long finish_line;$/;"	m	struct:line_args
+finish_line	test.c	/^    long finish_line;$/;"	m	struct:line_args	file:
 fold	backup/helpers.c	/^void fold(char line[], long width)$/;"	f
 fold	helpers.c	/^void fold(char line[], long width)$/;"	f
 found	line.h	/^    struct line_list* found;$/;"	m	struct:linelist_pair	typeref:struct:linelist_pair::line_list
@@ -150,6 +152,9 @@ len	backup/line.h	/^        long len;$/;"	m	struct:line
 len	line.h	/^        long len;$/;"	m	struct:line
 line	backup/line.h	/^struct line {$/;"	s
 line	line.h	/^struct line {$/;"	s
+line_args	line.c	/^struct line_args* line_args(const char args[]) {$/;"	f
+line_args	line.h	/^struct line_args {$/;"	s
+line_args	test.c	/^struct line_args {$/;"	s	file:
 line_free	backup/line.c	/^void line_free(struct line* aLine) {$/;"	f
 line_free	line.c	/^void line_free(struct line* aLine) {$/;"	f
 line_list	backup/line.h	/^struct line_list {$/;"	s
@@ -182,6 +187,7 @@ load_file	fileio.c	/^BOOLEAN load_file(const char fname[], struct line_list* the
 main	backup/main.c	/^int main(int argc, char* argv[]) {$/;"	f
 main	examples/fred.c	/^int main(void)$/;"	f
 main	main.c	/^int main(int argc, char* argv[]) {$/;"	f
+main	test.c	/^int main(int argc, char* argv[]) {$/;"	f
 next	backup/line.h	/^        struct line_node* next;$/;"	m	struct:line_node	typeref:struct:line_node::line_node
 next	line.h	/^        struct line_node* next;$/;"	m	struct:line_node	typeref:struct:line_node::line_node
 normal_print	backup/repl.c	/^int normal_print(const char format[], ...) {$/;"	f
@@ -191,6 +197,7 @@ num_lines	line.h	/^        long num_lines;$/;"	m	struct:line_list
 print_usage	backup/main.c	/^void print_usage(void) {$/;"	f
 print_usage	main.c	/^void print_usage(void) {$/;"	f
 read_rest_of_line	repl.c	/^static void read_rest_of_line(void) {$/;"	f	file:
+remove_newlines	repl.c	/^static void remove_newlines(char input[]) {$/;"	f	file:
 repl	backup/repl.c	/^void repl(const struct command commands[], char filename[]) {$/;"	f
 repl	repl.c	/^void repl(const struct command commands[], char filename[]) {$/;"	f
 replace	line.h	/^    const char* replace;$/;"	m	struct:replace_pair
@@ -201,6 +208,8 @@ result	shared.h	/^struct result {$/;"	s
 save_file	backup/fileio.c	/^BOOLEAN save_file(const char fname[], const struct line_list* thelist) {$/;"	f
 save_file	fileio.c	/^BOOLEAN save_file(const char fname[], const struct line_list* thelist) {$/;"	f
 search	line.h	/^    const char* search;$/;"	m	struct:replace_pair
+start_line	line.h	/^    long start_line;$/;"	m	struct:line_args
+start_line	test.c	/^    long start_line;$/;"	m	struct:line_args	file:
 strdup	backup/helpers.c	/^char* strdup(const char orig[])$/;"	f
 strdup	helpers.c	/^char* strdup(const char orig[])$/;"	f
 strlen	examples/strlen.c	/^size_t strlen(const char string[])$/;"	f

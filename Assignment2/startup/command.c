@@ -37,6 +37,9 @@ void commands_init(struct command commands[])
     }
 }
 
+static void remove_newlines(char input[]) {
+   input[strcspn(input,"\n")] = 0; 
+}
 /**
  * implements the "new file" command. You should just set the line list to be
  * an empty list
@@ -144,7 +147,7 @@ BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
 {
     char input[INPUTSIZE];
     int rangeLength;
-    long inserted_items;
+    int initialInsert;
     struct line_args* lines;
     int iter = 0;
     while (isspace(*remainder))
@@ -156,32 +159,26 @@ BOOLEAN command_insert(const char remainder[], struct line_list* thelist)
     for(; iter<rangeLength;iter++) {
         ++remainder;
     }    
-    inserted_items = lines->finish_line - lines->start_line;
-    if(inserted_items < 0)
-        if (lines->finish_line != 0)
-            return FALSE;
-        else
-            inserted_items = 1;
-    else if ((inserted_items == 0) && lines->start_line!=0)
-        inserted_items = 1;
-    else if (inserted_items>0)
-        inserted_items++;
    
-    normal_print("\n%d: %s", lines->start_line, remainder);
+    initialInsert = lines->start_line;
+    normal_print("%d: ", initialInsert);
     while(fgets(input,sizeof(lines)+1,stdin) != NULL) {
         if(input[0]=='\n') {
-            break;
+            /*if (initialInsert!=0) {
+               if(!linelist_insert(thelist, input, initialInsert))
+                  return FALSE;
+            }*/
+            return TRUE;
         } else {
-
+            remove_newlines(input);
+            if (initialInsert!=0) {
+               if(!linelist_insert(thelist, input, initialInsert))
+                  return FALSE;
+            }
+            normal_print("%d: ", ++initialInsert);
         }
     }
-
-    if (lines->start_line!=0) {
-       if(!linelist_insert(thelist, remainder, lines->start_line))
-          return FALSE;
-        else
-           return TRUE; 
-    }
+    normal_print("\n");
     return FALSE;
 }
 
